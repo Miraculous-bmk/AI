@@ -1,0 +1,6 @@
+{% extends 'store/base.html' %}
+{% block content %}
+<h2>Crypto Payment for {{ product.name }}</h2>
+<p>Send {{ eth_price }} ETH to the following address:</p>
+<p><strong>{{ payment_address }}</strong></p>
+{% endblock %}

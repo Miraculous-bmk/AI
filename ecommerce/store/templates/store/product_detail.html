@@ -1,0 +1,57 @@
+{% extends 'store/base.html' %}
+{% block content %}
+<div class="row">
+    <div class="card col-md-6">
+        <img src="https://via.placeholder.com/300" class="img-fluid" alt="{{ product.name }}">
+    </div>
+    <div class="card-body col-md-6">
+        <h3 class="card-title">{{ product.name }}</h5>
+        <p class="card-text">{{ product.description }}</p>
+        <p class="card-text"><strong>${{ product.price }}</strong></p>
+        <a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary">Add to Cart</a>
+        <form action="{% url 'checkout_session' product.id %}" method="POST">
+            {% csrf_token %}
+            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                data-key="{{ stripe_publishable_key }}"
+                data-amount="{{ product.price|floatformat:2|mul:100|int }}"
+                data-name="{{ product.name }}"
+                data-description="{{ product.description }}"
+                data-image="https://via.placeholder.com/150"
+                data-locale="auto">
+            </script>
+            <button type="submit" class="btn btn-success">Buy Now</button>
+        </form>
+    </div>
+</div>
+<hr>
+<h3>Reviews</h3>
+{% for review in product.reviews.all %}
+    <div class="review">
+        <strong>{{ review.user.username }}</strong> - {{ review.rating }} stars
+        <p>{{ review.review_text }}</p>
+        <p><small>{{ review.created_at }}</small></p>
+    </div>
+{% endfor %}
+<hr>
+{% if user.is_authenticated %}
+    <h3>Leave a review</h3>
+    <form action="{% url 'add_review' product.id %}" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="rating">Rating</label>
+            <select class="form-control" id="rating" name="rating">
+                {% for i in 1|to_int:5 %}
+                    <option value="{{ i }}">{{ i }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="review_text">Review</label>
+            <textarea class="form-control" id="review_text" name="review_text" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+{% else %}
+    <p><a href="{% url 'login' %}">Log in</a> to leave a review.</p>
+{% endif %}
+{% endblock %}

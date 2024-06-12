@@ -1,0 +1,18 @@
+{% extends 'store/base.html' %}
+{% block hero-container %}
+<section id="hero" class="d-flex flex-column justify-content-center align-items-center">
+    <div class="hero-container" data-aos="fade-in">
+      <h1></h1>
+      <p><span class="typed" data-typed-items=""></span></p>
+    </div>
+</section>
+{% endblock hero-container %}
+{% block content %}
+  {% for message in messages %}
+  <div  class="alert alert-{{message.tags}} alert-alert-dismissible fade show" role="alert">
+      <strong> {{message}} </strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endfor %}
+{% endblock content %}
+

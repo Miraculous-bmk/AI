@@ -1,0 +1,4874 @@
+create a wed-side  with django using this python code convert it to a webside, let look like amazon store webside but adding a web3 and banking for payment. also build an API and user ID, adding signup and login with three user  authentication. using html as my base.html, now let go
+while True:
+    nname = ""
+    company_name = ""
+    def login():
+        global nname
+        global company_name
+        company_users = {
+            "MIROS G-NETWORK": {"username": "miraculous", "password": "52528", "name": "John Smith"},
+            "GOLD NETWORK": {"username": "bennito", "password": "25085", "name": "Jane James"}
+        }
+        company_name = input("Enter company name: ").upper()
+        if company_name not in company_users:
+            print("Company not found.")
+            print("creating a company for you ...")
+            username_input = input("Enter your user name: ")
+            password_input = int(input("Enter your password: "))
+            nname= input("Enter your name: ")
+            company_users = {
+            company_name: {"username": username_input, "password": password_input, "name": nname},}
+            print("Creating acconut successful. Welcome,", nname + "!")
+        else:
+            username_input = input("Enter username: ")
+            user_info = company_users[company_name]
+            if username_input == user_info["username"]:
+                trails = 0
+                while trails <=2:
+                    trails+=1
+                    password_input = input("Enter Password: ")
+                    if password_input == user_info["password"]:
+                        print("Login successful. Welcome,", user_info["name"] + "!")
+                        break
+                    else:
+                        print("Incorrect password.")
+                else:
+                    print("Try again after 30 mins ")
+            else:
+                print("Username not found.")
+        try:
+            nname = user_info["name"]
+            return company_name, nname 
+        except UnboundLocalError:
+            return company_name, nname
+    def digit(no, error):
+        while True:
+            try:
+                no = int(no)
+                break
+            except ValueError:
+                no = input(f"Enter a valid {error} ")
+        return no
+    def sales():
+        sales_list = list()
+        total = 0
+        while True:
+            i_dic = {}
+            n_item = input("Input Item name: ").lower()
+            if n_item == "done":
+                break
+            try:
+                i_price = float(input("Input Price: "))
+                i_quant = float(input("Input Quantity (KG): "))
+            except ValueError:
+                print("Please enter numbers only for Price and Quantity.")
+            item_total = i_price * i_quant
+            
+            i_dic[n_item] = (i_price, i_quant, item_total)
+            total += item_total
+            sales_list.append(i_dic)
+        print()
+        print("-----------------------------------------------")
+        invoice = f"""\
+{company_name}
+    {nname}
+        """
+        print(invoice)
+        print("{:<10} {:<15} {:<20} {:<10}".format("Item", "Price ($)", "Quantity (KG)", "Total ($)"))
+        for item in sales_list:
+            for name, (price, quantity, item_total) in item.items():
+                print("{:<10} {:<15} {:<20} {:<10}".format(name, price, quantity, item_total))
+        
+        print("{:<10} {:<15} {:<20} {:<10}".format("Total", "", "", total))
+        print("Thanks for doing business ")
+    login()
+    sales()
+    cont = input("Do you wish to prepare another invoice: ")
+    if cont == "ÿes":
+        break
+    else:
+        continue 
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheese E-commerce Store</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-Neyyh/LuUjtNdZvwttaSBbJUiE7iOFvTizV3jQbVIQ5jYlUS8EyVSM6oZwF/ljM7tEkBdLiAkAStVu2t0y+57Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header id="navbar-main"
+        class="nav-opt-sprite nav-flex nav-locale-us nav-lang-en nav-ssl nav-unrec nav-progressive-attribute">
+        <div id="navbar" role="navigation" aria-label="navigation"
+            class="nav-sprite-v1 celwidget nav-bluebeacon nav-a11y-t1 bold-focus-hover layout2 nav-flex layout3 layout3-alt nav-packard-glow hamburger nav-progressive-attribute">
+            <div id="nav-belt">
+                <div class="nav-left">
+                    <div id="nav-logo">
+                        <a href="{% static 'img/logo.png' %}" id="nav-logo-sprites"
+                            class="nav-logo-link nav-progressive-attribute" aria-label="Cheese">
+                            <span class="nav-sprite nav-logo-base"></span>
+                            <span id="logo-ext" class="nav-sprite nav-logo-ext nav-progressive-content"></span>
+                            <span class="nav-logo-locale">.us</span>
+                        </a>
+                    </div>
+                    <div id="nav-global-location-slot"></div>
+                    <div class="nav-left">
+                        <li class="nav-item {% if request.path == '/' %}active{% endif %}">
+                            <a href="" class="nav-a nav-a-2 nav-progressive-attribute" id="nav-home" tabindex="">
+                                <span class="nav-line-2">Home<span class="nav-icon nav-arrow"></span></span>
+                            </a>
+                        </li>
+                    </div>
+                </div>
+                <div class="nav-fill">
+                    <div id="nav-search">
+                        <div id="nav-bar-left"></div>
+                        <div id="vsar-nav-image-search" class="vsar-img-panel-is-hidden">
+                            <div id="vsar-img-panel-container">
+                                <img id="vsar-img-close-btn" class="vsar-img-close-btn"
+                                    src="https://example.com/images/close-large.png">
+                                <div id="vsar-img-panel-header">
+                                    <div class="vsar-lens-branding">
+                                        <img class="vsar-branding-lens-logo" id="vsar-branding-lens-logo"
+                                            src="https://example.com/images/cheese-lens-branding-icon.png">
+                                        <div class="vsar-branding-cheese-text">
+                                            <p>Cheese</p>
+                                        </div>
+                                        <div class="vsar-branding-lens-text">
+                                            <p>lens</p>
+                                        </div>
+                                    </div>
+                                    <p class="vsar-lens-upload-img-desc">Search with any image</p>
+                                </div>
+
+                                <div id="vsar-invalid-file-type-img"
+                                    class="a-box a-alert a-alert-error aok-hidden vsar-alert" role="alert">
+                                    <div class="a-box-inner a-alert-container">
+                                        <h4 class="a-alert-heading">Unsupported image file format.</h4>
+                                        <i class="a-icon a-icon-alert"></i>
+                                        <div class="a-alert-content">Upload a JPEG, PNG, WEBP, GIF, SVG, AVIF, BMP, ICO
+                                            image file.</div>
+                                    </div>
+                                </div>
+
+                                <div id="vsar-invalid-file-size-img"
+                                    class="a-box a-alert a-alert-error aok-hidden vsar-alert" role="alert">
+                                    <div class="a-box-inner a-alert-container">
+                                        <h4 class="a-alert-heading">Image file size is too large.</h4>
+                                        <i class="a-icon a-icon-alert"></i>
+                                        <div class="a-alert-content">Upload an image file size of 5MB or less.</div>
+                                    </div>
+                                </div>
+
+                                <div id="vsar-img-panel-upload-area">
+                                    <div id="vsar-img-content-top">
+                                        <div class="vsar-gallery-icon"><img id="vsar-gallery-icon-img"
+                                                src="https://example.com/images/gallery-image.png">
+                                        </div>
+                                        <div class="vsar-img-drag-text">
+                                            <p>Drag an image here</p>
+                                        </div>
+                                    </div>
+                                    <div id="vsar-img-content-bottom">
+                                        <button name="vsar-img-upload-btn" id="vsar-img-upload-btn"
+                                            class="a-button a-button-primary" type="button">
+                                            <label class="a-button-text" for="vsar_img_file">Upload an image</label>
+                                        </button>
+                                        <input type="file" id="vsar_img_file" accept="image/avif,image/*"
+                                            class="vsar-upload-file" style="display:none;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <form id="nav-search-bar-form" accept-charset="utf-8" action=""
+                            class="nav-searchbar nav-progressive-attribute" method="GET" name="site-search"
+                            role="search">
+                            <div class="nav-left">
+                                <div id="nav-search-dropdown-card">
+                                    <div class="nav-search-scope nav-sprite">
+                                        <div class="nav-search-facade" data-value="search-alias=aps">
+                                            <span id="nav-search-label-id"
+                                                class="nav-search-label nav-progressive-content"
+                                                style="width: auto;">All</span>
+                                            <i class="nav-icon"></i>
+                                        </div>
+                                        <label id="searchDropdownDescription" for="searchDropdownBox"
+                                            class="nav-progressive-attribute" style="display:none">
+                                            Select the department you want to search in
+                                        </label>
+                                        <select aria-describedby="searchDropdownDescription"
+                                            class="nav-search-dropdown searchSelect nav-progressive-attribute nav-progressive-search-dropdown"
+                                            data-nav-digest="k+fyIAyB82R9jVEmroQ0OWwSW3A=" data-nav-selected="0"
+                                            id="searchDropdownBox" name="url" style="display: block; top: 2.5px;"
+                                            tabindex="0" title="Search in">
+                                            <option selected="selected" value="search-alias=aps">All Departments
+                                            </option>
+                                            <option value="search-alias=arts-crafts-intl-ship">Arts &amp; Crafts
+                                            </option>
+                                            <option value="search-alias=automotive-intl-ship">Automotive</option>
+                                            <option value="search-alias=baby-products-intl-ship">Baby</option>
+                                            <option value="search-alias=beauty-intl-ship">Beauty &amp; Personal Care
+                                            </option>
+                                            <option value="search-alias=stripbooks-intl-ship">Books</option>
+                                            <option value="search-alias=electronics-intl-ship">Computers, Digital Music
+                                                &amp; Electronics</option>
+                                            <option value="search-alias=tools-intl-ship">Gift Card &amp; Home
+                                                Improvement</option>
+                                            <option value="search-alias=hpc-intl-ship">Health &amp; Household</option>
+                                            <option value="search-alias=kitchen-intl-ship">Home &amp; Kitchen</option>
+                                            <option value="search-alias=industrial-intl-ship">Industrial &amp;
+                                                Scientific</option>
+                                            <option value="search-alias=fashion-male-intl-ship">Men's &amp; Boys'
+                                                Fashion</option>
+                                            <option value="search-alias=movies-tv-intl-ship">Movies, Games &amp; Music
+                                            </option>
+                                            <option value="search-alias=fashion-female-intl-ship">Women's &amp; Girls'
+                                                Fashion</option>
+                                            <option value="search-alias=software-intl-ship">Software</option>
+                                            <option value="search-alias=sporting-intl-ship">Sports &amp; Outdoors
+                                            </option>
+                                            <option value="search-alias=tools-intl-ship">Tools &amp; Home Improvement
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="nav-fill">
+                                <div class="nav-search-field">
+                                    <label for="twotabsearchtextbox" style="display: none;">Search Cheese</label>
+                                    <input type="text" id="twotabsearchtextbox" value="" name="field-keywords"
+                                        autocomplete="off" placeholder="Search Cheese"
+                                        class="nav-input nav-progressive-attribute" dir="auto" tabindex="0"
+                                        aria-label="Search Cheese" spellcheck="false">
+                                </div>
+                                <div id="nav-iss-attach"></div>
+                                <div id="nav-vsar-lens-container" class="nav-search-field">
+                                    <img class="vsar-lens-icon" id="vsar-lens-icon-img"
+                                        src="https://example.com/images/MLT_Icon_x2.png">
+                                </div>
+                            </div>
+                            <div class="nav-right">
+                                <div class="nav-search-submit nav-sprite">
+                                    <span id="nav-search-submit-text"
+                                        class="nav-search-submit-text nav-sprite nav-progressive-attribute"
+                                        aria-label="Go">
+                                        <input id="nav-search-submit-button" type="submit"
+                                            class="nav-input nav-progressive-attribute" value="Go" tabindex="0">
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="nav-right">
+                    <div id="nav-tools" class="layoutToolbarPadding">
+                        <a href="/customer-preferences/edit?ie=UTF8&amp;preferencesReturnUrl=%2Fref%3Dnav_logo&amp;ref_=topnav_lang_ais"
+                            id="icp-nav-flyout" class="nav-a nav-a-2 icp-link-style-2"
+                            aria-label="Choose a language for shopping.">
+                            <span class="icp-nav-link-inner">
+                                <span class="nav-line-1">
+                                </span>
+                                <span class="nav-line-2">
+                                    <span class="icp-nav-flag icp-nav-flag-us icp-nav-flag-lop"></span>
+                                    <div>EN</div>
+                                    <span class="nav-icon nav-arrow" style="visibility: visible;"></span>
+                                </span>
+                            </span>
+                        </a>
+                        <a href="" class="nav-a nav-a-2   nav-progressive-attribute" data-nav-ref="nav_ya_signin"
+                            data-nav-role="signin" data-ux-jq-mouseenter="true" id="nav-link-accountList" tabindex="0"
+                            data-csa-c-type="link" data-csa-c-slot-id="nav-link-accountList"
+                            data-csa-c-content-id="nav_ya_signin" data-csa-c-id="ucpcw6-fo03tl-xdk3wl-tndqul">
+                            <div class="nav-line-1-container"><span id="nav-link-accountList-nav-line-1"
+                                    class="nav-line-1 nav-progressive-content">Hello, sign in</span></div>
+                            <span class="nav-line-2 ">Account &amp; Lists<span class="nav-icon nav-arrow" 10
+                                    style="visibility: visible;"></span>
+                            </span>
+                        </a>
+                        <a href="/order_history?ref_=nav_orders_first" class="nav-a nav-a-2   nav-progressive-attribute"
+                            id="nav-orders" tabindex="0">
+                            <span class="nav-line-1">Returns</span>
+                            <span class="nav-line-2">&amp; Orders<span class="nav-icon nav-arrow"></span></span>
+                        </a>
+                        <a href="/cart/cart.html?ref_=nav_cart" aria-label="0 items in cart"
+                            class="nav-a nav-a-2 nav-progressive-attribute" id="nav-cart">
+                            <div id="nav-cart-count-container">
+                                <span id="nav-cart-count" aria-hidden="true"
+                                    class="nav-cart-count nav-cart-0 nav-progressive-attribute nav-progressive-content">0</span>
+                                <span class="nav-cart-icon nav-sprite"></span>
+                            </div>
+                            <div id="nav-cart-text-container" class=" nav-progressive-attribute">
+                                <span aria-hidden="true" class="nav-line-1">
+                                </span>
+                                <span aria-hidden="true" class="nav-line-2">
+                                    Cart
+                                    <span class="nav-icon nav-arrow"></span>
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="nav-flyout-iss-anchor">
+                <div id="nav-flyout-searchAjax" class="nav-issFlyout nav-flyout">
+                    <div class="nav-template nav-flyout-content"></div>
+                    <div class="autocomplete-results-container">
+                        <div class="two-pane-results-container">
+                            <div class="left-pane-results-container"></div>
+                            <div class="right-pane-results-container"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="nav-flyout-anchor">
+                <div id="nav-flyout-amazonprime" class="nav-coreFlyout nav-flyout">
+                    <div class="nav-arrow">
+                        <div class="nav-arrow-inner"></div>
+                    </div>
+                </div>
+                <div id="nav-flyout-accountList" class="nav-coreFlyout nav-flyout">
+                    <div class="nav-arrow">
+                        <div class="nav-arrow-inner"></div>
+                    </div>
+                    <div class="nav-template nav-flyout-content">
+                        <div id="nav-al-container">
+                            <div id="nav-al-signin">
+                                <div id="nav-flyout-ya-signin" class="nav-flyout-content nav-flyout-accessibility">
+                                    <a href="/login" rel="nofollow" class="nav-action-signin-button"
+                                        data-nav-role="signin" data-nav-ref="nav_signin">
+                                        <span class="nav-action-inner">Sign in</span>
+                                    </a>
+                                    <div id="nav-flyout-ya-newCust"
+                                        class="nav_pop_new_cust nav-flyout-content nav-flyout-accessibility">
+                                        New customer?
+                                        <a href="/signup" rel="nofollow" class="nav-a">Start here.</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="nav-al-wishlist"
+                                class="nav-al-column nav-tpl-itemList nav-flyout-content nav-flyout-accessibility">
+                                <div class="nav-title" id="nav-al-title">Your Lists</div>
+                                <a href="" class="nav-link nav-item">
+                                    <span class="nav-text">Create a List</span>
+                                </a>
+                                <a href="" class="nav-link nav-item">
+                                    <span class="nav-text">Find a List or Registry</span>
+                                </a>
+                            </div>
+                            <div id="nav-al-your-account"
+                                class="nav-al-column nav-template nav-flyout-content nav-tpl-itemList nav-flyout-accessibility">
+                                <div class="nav-title">Your Account</div>
+                                <a href="" class="nav-link nav-item">
+                                    <span class="nav-text">Account</span>
+                                </a>
+                                <a id="nav_prefetch_yourorders" href="" class="nav-link nav-item">
+                                    <span class="nav-text">Orders</span>
+                                </a>
+                                <a href="/gp/yourstore?ref_=nav_AccountFlyout_recs" class="nav-link nav-item">
+                                    <span class="nav-text">Recommendations</span>
+                                </a>
+                                <a href="/gp/history?ref_=nav_AccountFlyout_browsinghistory" class="nav-link nav-item">
+                                    <span class="nav-text">Browsing History</span>
+                                </a>
+                                <a href="/gp/video/watchlist?ref_=nav_AccountFlyout_ywl" class="nav-link nav-item">
+                                    <span class="nav-text">Watchlist</span>
+                                </a>
+                                <a href="/gp/video/library?ref_=nav_AccountFlyout_yvl" class="nav-link nav-item">
+                                    <span class="nav-text">Video Purchases &amp; Rentals</span>
+                                </a>
+                                <a href="/gp/kindle/ku/ku_central?ref_=nav_AccountFlyout_ku" class="nav-link nav-item">
+                                    <span class="nav-text">Kindle Unlimited</span>
+                                </a>
+                                <a href="/hz/mycd/myx?pageType=content&amp;ref_=nav_AccountFlyout_myk"
+                                    class="nav-link nav-item">
+                                    <span class="nav-text">Content &amp; Devices</span>
+                                </a>
+                                <a href="/gp/subscribe-and-save/manager/viewsubscriptions?ref_=nav_AccountFlyout_sns"
+                                    class="nav-link nav-item">
+                                    <span class="nav-text">Subscribe &amp; Save Items</span>
+                                </a>
+                                <a href="/hz5/yourmembershipsandsubscriptions?ref_=nav_AccountFlyout_digital_subscriptions"
+                                    class="nav-link nav-item">
+                                    <span class="nav-text">Memberships &amp; Subscriptions</span>
+                                </a>
+                                <a href="" class="nav-link nav-item">
+                                    <span class="nav-text">Music Library</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="nav-main" class="nav-sprite">
+                <div class="nav-left">
+                    <script type="text/javascript">window.navmet.tmp = +new Date();</script>
+                    <a href="/product" id="nav-hamburger-menu" role="button" aria-label="Open Menu"
+                        data-csa-c-type="widget" data-csa-c-slot-id="HamburgerMenuDesktop"
+                        data-csa-c-interaction-events="click" data-csa-c-id="h0yi58-va24mo-i96e8l-jlmv3q">
+                        <i class="hm-icon nav-sprite"></i>
+                        <span class="hm-icon-label">All</span>
+                    </a>
+                </div>
+                <div class="nav-fill">
+                    <div id="nav-shop"></div>
+                    <div id="nav-xshop-container">
+                        <div id="nav-xshop" class="nav-progressive-content">
+                            <script type="text/javascript">window.navmet.tmp = +new Date();</script>
+                            <a href="/gp/goldbox?ref_=nav_cs_gb" class="nav-a" tabindex="0" data-csa-c-type="link"
+                                data-csa-c-slot-id="nav_cs_0" data-csa-c-content-id="nav_cs_gb"
+                                data-csa-c-id="ml6183-4r02qf-rkgdxj-9g3hrg">Today's Deals</a>
+                            <a href="/help/customer/display.htm;" class="nav-a" tabindex="0" data-csa-c-type="link"
+                                data-csa-c-slot-id="nav_cs_1" data-csa-c-content-id="nav_cs_customerservice"
+                                data-csa-c-id="ip9nar-klace9-q2ag5b-dxn696">Customer Service</a>
+                            <a href="/testimonial" class="nav-a" tabindex="0" data-csa-c-type="link"
+                                data-csa-c-slot-id="nav_cs_2" data-csa-c-content-id="nav_cs_registry"
+                                data-csa-c-id="kycp3d-l7m96z-zqeos-fy2mcr">Testimonial</a>
+                            <a href="/gift-cards" class="nav-a" tabindex="0" data-csa-c-type="link"
+                                data-csa-c-slot-id="nav_cs_3" data-csa-c-content-id="nav_cs_gc"
+                                data-csa-c-id="7x1d6s-a9ixj7-2cixev-itph92">Gift
+                                Cards</a>
+                            <a href="" class="nav-a" tabindex="0" data-csa-c-type="link" data-csa-c-slot-id="nav_cs_4"
+                                data-csa-c-content-id="nav_cs_sell" data-csa-c-id="qip066-ll1dvx-yottvy-s5k2pz">Crypto
+                                Sell &amp; Buy</a>
+                            <a href="/content"
+                                aria-label="Click to call our Disability Customer Support line, or reach us directly at 1-888-283-1678"
+                                class="nav-hidden-aria" tabindex="0" data-csa-c-type="link"
+                                data-csa-c-slot-id="nav_cs_5" data-csa-c-id="uuvv5z-1ohaec-lqr89a-7xhyzj">Disability
+                                Customer Support</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-right">
+                    <div id="nav-swmslot">
+                        <!-- Scheduled SWM widget failed to render -->
+                    </div>
+                </div>
+            </div>
+            <div id="nav-subnav-toaster"></div>
+            <div id="nav-progressive-subnav"></div>
+        </div>
+    </header>
+    <div class="hero-container">
+        {% block hero-container %}
+        {% endblock hero-container %}
+    </div>
+    <!-- Main Content Area -->
+    <div class="container mt-5">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <!-- Footer -->
+    <footer class="text-center py-1">
+        <div class="container">
+            <p>&copy; 2024 E-commerce Store. All rights reserved.</p>
+        </div>
+    </footer>
+    <!-- Bootstrap and Custom Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>
+ChatGPT
+
+To create a Django web application based on the provided script and your requirements, we need to convert the Python script to Django views, models, and forms, create templates for the frontend, and set up user authentication and an API. The project will have a structure resembling an e-commerce site like Amazon, with web3 and banking for payment.
+
+Here's an outline of what needs to be done:
+
+    Setup Django Project and App:
+        Initialize a Django project and an application within it.
+        Set up the required settings and configurations.
+
+    Create Models:
+        Define models for Company, User, Product, Invoice, and other necessary entities.
+
+    User Authentication:
+        Implement signup and login functionalities using Django's built-in authentication system.
+        Create forms for user registration and login.
+        Configure URL routes for these views.
+
+    Web3 and Banking Integration:
+        Use a library like web3.py to integrate blockchain functionalities.
+        Implement banking functionalities using a suitable payment gateway.
+
+    API Development:
+        Use Django Rest Framework (DRF) to create an API for managing products, orders, and user authentication.
+
+    Templates and Static Files:
+        Create HTML templates for the frontend.
+        Use CSS and JavaScript to style the pages and enhance user experience.
+
+Below is a basic implementation structure for the above requirements:
+1. Setup Django Project and App
+
+bash
+
+django-admin startproject ecommerce
+cd ecommerce
+django-admin startapp store
+
+Add the app to INSTALLED_APPS in settings.py:
+
+python
+
+INSTALLED_APPS = [
+    ...
+    'store',
+    'rest_framework',
+]
+
+2. Create Models
+
+In store/models.py:
+
+python
+
+from django.contrib.auth.models import AbstractUser
+from django.db import models
+
+class User(AbstractUser):
+    name = models.CharField(max_length=255)
+
+class Company(models.Model):
+    name = models.CharField(max_length=255)
+    users = models.ManyToManyField(User, related_name='companies')
+
+class Product(models.Model):
+    name = models.CharField(max_length=255)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    quantity = models.DecimalField(max_digits=10, decimal_places=2)
+
+class Invoice(models.Model):
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    total = models.DecimalField(max_digits=10, decimal_places=2)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+class InvoiceItem(models.Model):
+    invoice = models.ForeignKey(Invoice, related_name='items', on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.DecimalField(max_digits=10, decimal_places=2)
+    total = models.DecimalField(max_digits=10, decimal_places=2)
+
+3. User Authentication
+
+Create forms in store/forms.py:
+
+python
+
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from .models import User
+
+class SignupForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['username', 'name', 'password1', 'password2']
+
+class LoginForm(forms.Form):
+    username = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)
+
+Create views in store/views.py:
+
+python
+
+from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import render, redirect
+from .forms import SignupForm, LoginForm
+
+def signup_view(request):
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('home')
+    else:
+        form = SignupForm()
+    return render(request, 'signup.html', {'form': form})
+
+def login_view(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+    else:
+        form = LoginForm()
+    return render(request, 'login.html', {'form': form})
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
+
+Configure URLs in store/urls.py:
+
+python
+
+from django.urls import path
+from .views import signup_view, login_view, logout_view
+
+urlpatterns = [
+    path('signup/', signup_view, name='signup'),
+    path('login/', login_view, name='login'),
+    path('logout/', logout_view, name='logout'),
+]
+
+Include the app URLs in the project's urls.py:
+
+python
+
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('store/', include('store.urls')),
+]
+
+4. Web3 and Banking Integration
+
+Install web3:
+
+bash
+
+pip install web3
+
+Create a utility for web3 interactions in store/utils.py:
+
+python
+
+from web3 import Web3
+
+w3 = Web3(Web3.HTTPProvider('http://localhost:8545'))  # Replace with your provider
+
+def create_transaction(user, amount):
+    # Logic to create a transaction
+    pass
+
+5. API Development
+
+Install Django Rest Framework:
+
+bash
+
+pip install djangorestframework
+
+Create serializers in store/serializers.py:
+
+python
+
+from rest_framework import serializers
+from .models import Product, Invoice, InvoiceItem
+
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = '__all__'
+
+class InvoiceItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = InvoiceItem
+        fields = '__all__'
+
+class InvoiceSerializer(serializers.ModelSerializer):
+    items = InvoiceItemSerializer(many=True)
+
+    class Meta:
+        model = Invoice
+        fields = '__all__'
+
+Create API views in store/api_views.py:
+
+python
+
+from rest_framework import viewsets
+from .models import Product, Invoice
+from .serializers import ProductSerializer, InvoiceSerializer
+
+class ProductViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+class InvoiceViewSet(viewsets.ModelViewSet):
+    queryset = Invoice.objects.all()
+    serializer_class = InvoiceSerializer
+
+Configure API URLs in store/api_urls.py:
+
+python
+
+from rest_framework.routers import DefaultRouter
+from .api_views import ProductViewSet, InvoiceViewSet
+
+router = DefaultRouter()
+router.register(r'products', ProductViewSet)
+router.register(r'invoices', InvoiceViewSet)
+
+urlpatterns = router.urls
+
+Include the API URLs in store/urls.py:
+
+python
+
+from django.urls import path, include
+
+urlpatterns = [
+    path('signup/', signup_view, name='signup'),
+    path('login/', login_view, name='login'),
+    path('logout/', logout_view, name='logout'),
+    path('api/', include('store.api_urls')),
+]
+
+6. Templates and Static Files
+
+Create templates for the views in store/templates:
+
+signup.html:
+
+html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+</head>
+<body>
+    <h1>Signup</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Signup</button>
+    </form>
+</body>
+</html>
+
+login.html:
+
+html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <h1>Login</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>
+
+base.html:
+
+html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheese E-commerce Store</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <header>
+        <!-- Navbar content here -->
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>
+
+Update views to use base.html as the base template.
+
+This structure should get you started on building a Django e-commerce application with user authentication, API endpoints, and a base for further integration of web3 and payment functionalities. For a fully-fledged application, you would need to expand upon these basics, ensuring proper error handling, security, and other features typical of an e-commerce platform.
+go on
+ChatGPT
+
+To create a comprehensive e-commerce website with Django, incorporating the provided Python code for login and sales functionality, a user authentication system, Web3 payments, and a banking system, follow these steps:
+Project Structure
+
+    Set Up Django Project:
+    Create a new Django project and app.
+
+    bash
+
+django-admin startproject ecommerce_project
+cd ecommerce_project
+django-admin startapp store
+
+Install Required Packages:
+Install Django Rest Framework and Django Allauth for authentication, and web3.py for Web3 functionalities.
+
+bash
+
+pip install djangorestframework django-allauth web3
+
+Settings Configuration:
+Update the settings.py to include necessary apps and configurations.
+
+python
+
+# ecommerce_project/settings.py
+INSTALLED_APPS = [
+    ...
+    'rest_framework',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'rest_framework.authtoken',
+    'store',
+]
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+SITE_ID = 1
+
+# Rest Framework Settings
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}
+
+# Web3 Settings
+WEB3_PROVIDER_URI = 'https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID'
+
+URLs Configuration:
+Update the urls.py to include the app URLs.
+
+python
+
+    # ecommerce_project/urls.py
+    from django.contrib import admin
+    from django.urls import path, include
+
+    urlpatterns = [
+        path('admin/', admin.site.urls),
+        path('accounts/', include('allauth.urls')),
+        path('api/', include('store.urls')),
+    ]
+
+Models
+
+Define the models for the product, user profiles, and sales transactions.
+
+python
+
+# store/models.py
+from django.db import models
+from django.contrib.auth.models import User
+
+class Company(models.Model):
+    name = models.CharField(max_length=100)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+class Product(models.Model):
+    name = models.CharField(max_length=100)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    quantity = models.IntegerField()
+
+class Sale(models.Model):
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+    total_price = models.DecimalField(max_digits=10, decimal_places=2)
+    date = models.DateTimeField(auto_now_add=True)
+
+Views
+
+Create the views for login, signup, product listing, and sales.
+
+python
+
+# store/views.py
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+from django.contrib.auth.models import User
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.authtoken.models import Token
+from .models import Company, Product, Sale
+from web3 import Web3
+
+class LoginView(APIView):
+    def post(self, request):
+        username = request.data.get('username')
+        password = request.data.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user:
+            auth_login(request, user)
+            token, created = Token.objects.get_or_create(user=user)
+            return Response({'token': token.key})
+        return Response({'error': 'Invalid credentials'}, status=400)
+
+class SignupView(APIView):
+    def post(self, request):
+        username = request.data.get('username')
+        password = request.data.get('password')
+        company_name = request.data.get('company_name')
+        user = User.objects.create_user(username=username, password=password)
+        company = Company.objects.create(name=company_name, user=user)
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({'token': token.key})
+
+class ProductView(APIView):
+    def get(self, request):
+        products = Product.objects.all()
+        return Response({'products': products})
+
+class SaleView(APIView):
+    def post(self, request):
+        company_id = request.data.get('company_id')
+        product_id = request.data.get('product_id')
+        quantity = request.data.get('quantity')
+        company = Company.objects.get(id=company_id)
+        product = Product.objects.get(id=product_id)
+        total_price = product.price * quantity
+        sale = Sale.objects.create(company=company, product=product, quantity=quantity, total_price=total_price)
+        return Response({'sale': 'Sale successful', 'total_price': total_price})
+
+class Web3PaymentView(APIView):
+    def post(self, request):
+        address = request.data.get('address')
+        amount = request.data.get('amount')
+        w3 = Web3(Web3.HTTPProvider('YOUR_INFURA_PROJECT_URL'))
+        transaction = {
+            'to': address,
+            'value': w3.toWei(amount, 'ether'),
+            'gas': 2000000,
+            'gasPrice': w3.toWei('50', 'gwei'),
+            'nonce': w3.eth.getTransactionCount('YOUR_WALLET_ADDRESS'),
+            'chainId': 1
+        }
+        signed_txn = w3.eth.account.signTransaction(transaction, private_key='YOUR_PRIVATE_KEY')
+        txn_hash = w3.eth.sendRawTransaction(signed_txn.rawTransaction)
+        return Response({'transaction_hash': txn_hash.hex()})
+
+URLs
+
+Define the URLs for the API endpoints.
+
+python
+
+# store/urls.py
+from django.urls import path
+from .views import LoginView, SignupView, ProductView, SaleView, Web3PaymentView
+
+urlpatterns = [
+    path('login/', LoginView.as_view(), name='login'),
+    path('signup/', SignupView.as_view(), name='signup'),
+    path('products/', ProductView.as_view(), name='products'),
+    path('sales/', SaleView.as_view(), name='sales'),
+    path('web3-payment/', Web3PaymentView.as_view(), name='web3-payment'),
+]
+
+Templates
+
+Create the base template and other HTML templates for the front end.
+
+html
+
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cheese E-commerce Store</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <header class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Cheese</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'products' %}">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'sales' %}">Sales</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'signup' %}">Signup</a>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+Running the Project
+
+    Migrate the Database:
+
+    bash
+
+python manage.py migrate
+
+Create a Superuser:
+
+bash
+
+python manage.py createsuperuser
+
+Run the Server:
+
+bash
+
+    python manage.py runserver
+
+Final Steps
+
+    Test the functionalities by accessing the URLs in your browser.
+    Implement further enhancements like product categorization, detailed product views, and integration with Web3 payment gateways.
+    Ensure the frontend is styled appropriately to match the desired look and feel.
+
+By following these steps, you will have a fully functional e-commerce site similar to Amazon with user authentication, product management, and Web3 payment capabilities.
+go on
+ChatGPT
+Enhancements and Features
+
+To make the e-commerce website more functional and user-friendly, consider adding the following enhancements and features:
+1. Product Details Page
+
+Create a detailed product page to display more information about each product.
+
+python
+
+# store/views.py
+from rest_framework import serializers
+
+class ProductDetailView(APIView):
+    def get(self, request, product_id):
+        product = Product.objects.get(id=product_id)
+        return Response({
+            'id': product.id,
+            'name': product.name,
+            'price': product.price,
+            'quantity': product.quantity,
+        })
+
+python
+
+# store/urls.py
+from .views import ProductDetailView
+
+urlpatterns += [
+    path('products/<int:product_id>/', ProductDetailView.as_view(), name='product-detail'),
+]
+
+html
+
+<!-- templates/product_detail.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="product-detail">
+    <h2>{{ product.name }}</h2>
+    <p>Price: {{ product.price }}</p>
+    <p>Quantity: {{ product.quantity }}</p>
+</div>
+{% endblock %}
+
+2. Cart and Checkout
+
+Implement a shopping cart and checkout system.
+
+python
+
+# store/models.py
+class Cart(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+
+python
+
+# store/views.py
+class CartView(APIView):
+    def get(self, request):
+        cart, created = Cart.objects.get_or_create(user=request.user)
+        items = CartItem.objects.filter(cart=cart)
+        return Response({
+            'cart_id': cart.id,
+            'items': [{'product': item.product.name, 'quantity': item.quantity, 'price': item.product.price} for item in items],
+        })
+
+    def post(self, request):
+        product_id = request.data.get('product_id')
+        quantity = request.data.get('quantity')
+        cart, created = Cart.objects.get_or_create(user=request.user)
+        product = Product.objects.get(id=product_id)
+        cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
+        cart_item.quantity = quantity
+        cart_item.save()
+        return Response({'message': 'Item added to cart'})
+
+class CheckoutView(APIView):
+    def post(self, request):
+        cart = Cart.objects.get(user=request.user)
+        items = CartItem.objects.filter(cart=cart)
+        for item in items:
+            Sale.objects.create(
+                company=request.user.company,
+                product=item.product,
+                quantity=item.quantity,
+                total_price=item.product.price * item.quantity
+            )
+        cart.delete()
+        return Response({'message': 'Checkout successful'})
+
+python
+
+# store/urls.py
+from .views import CartView, CheckoutView
+
+urlpatterns += [
+    path('cart/', CartView.as_view(), name='cart'),
+    path('checkout/', CheckoutView.as_view(), name='checkout'),
+]
+
+3. User Profiles
+
+Allow users to update their profiles.
+
+python
+
+# store/models.py
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    address = models.CharField(max_length=255)
+    phone = models.CharField(max_length=15)
+
+User.profile = property(lambda u: Profile.objects.get_or_create(user=u)[0])
+
+python
+
+# store/views.py
+class ProfileView(APIView):
+    def get(self, request):
+        profile = request.user.profile
+        return Response({
+            'address': profile.address,
+            'phone': profile.phone,
+        })
+
+    def post(self, request):
+        profile = request.user.profile
+        profile.address = request.data.get('address')
+        profile.phone = request.data.get('phone')
+        profile.save()
+        return Response({'message': 'Profile updated'})
+
+python
+
+# store/urls.py
+from .views import ProfileView
+
+urlpatterns += [
+    path('profile/', ProfileView.as_view(), name='profile'),
+]
+
+4. Order History
+
+Display past orders to users.
+
+python
+
+# store/views.py
+class OrderHistoryView(APIView):
+    def get(self, request):
+        sales = Sale.objects.filter(company=request.user.company)
+        return Response({
+            'orders': [{'product': sale.product.name, 'quantity': sale.quantity, 'total_price': sale.total_price, 'date': sale.date} for sale in sales],
+        })
+
+python
+
+# store/urls.py
+from .views import OrderHistoryView
+
+urlpatterns += [
+    path('order-history/', OrderHistoryView.as_view(), name='order-history'),
+]
+
+Styling and Frontend Enhancements
+
+For a more polished user interface, incorporate CSS frameworks like Bootstrap or Tailwind CSS. Additionally, consider using JavaScript frameworks like React or Vue.js for a more dynamic frontend.
+Deployment
+
+Finally, deploy your project to a cloud platform like Heroku, AWS, or DigitalOcean. Ensure to configure environment variables for sensitive data like Web3 provider URLs and private keys.
+
+    Prepare for Deployment:
+        Set DEBUG = False in settings.py.
+        Configure allowed hosts: ALLOWED_HOSTS = ['yourdomain.com'].
+        Set up static file serving.
+
+    Deploy:
+        Push your code to a version control system like GitHub.
+        Follow the platform-specific steps for deployment (e.g., Heroku: heroku create, git push heroku main).
+
+By following these steps, you will have a feature-rich e-commerce platform with modern functionalities, ready to serve users effectively.
+go on and also the frontend to
+ChatGPT
+Frontend Implementation
+
+For the frontend, we'll create a more dynamic and interactive user experience using HTML, CSS, and JavaScript. Optionally, you can use modern frameworks like React, Vue.js, or Angular for more advanced features and better state management.
+1. Basic HTML Structure
+
+Create an HTML template for the homepage.
+
+html
+
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Store</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/products/">Products</a></li>
+                <li class="nav-item"><a class="nav-link" href="/cart/">Cart</a></li>
+                <li class="nav-item"><a class="nav-link" href="/profile/">Profile</a></li>
+                <li class="nav-item"><a class="nav-link" href="/order-history/">Order History</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
+</body>
+</html>
+
+2. Product Listing Page
+
+Create a template for listing products.
+
+html
+
+<!-- templates/product_list.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Products</h1>
+<div class="row">
+    {% for product in products %}
+    <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">{{ product.price }}</p>
+                <p class="card-text">Quantity: {{ product.quantity }}</p>
+                <a href="/products/{{ product.id }}/" class="btn btn-primary">View Details</a>
+                <button class="btn btn-success" onclick="addToCart({{ product.id }})">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+3. Product Detail Page
+
+Create a template for the product detail page.
+
+html
+
+<!-- templates/product_detail.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ product.name }}</h1>
+<p>Price: {{ product.price }}</p>
+<p>Quantity: {{ product.quantity }}</p>
+<button class="btn btn-success" onclick="addToCart({{ product.id }})">Add to Cart</button>
+{% endblock %}
+
+4. Cart Page
+
+Create a template for the cart page.
+
+html
+
+<!-- templates/cart.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Your Cart</h1>
+<ul id="cart-items" class="list-group">
+    {% for item in items %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        {{ item.product.name }} (x{{ item.quantity }})
+        <span>{{ item.product.price }}</span>
+    </li>
+    {% endfor %}
+</ul>
+<button class="btn btn-primary mt-3" onclick="checkout()">Checkout</button>
+{% endblock %}
+
+5. JavaScript Functions
+
+Create JavaScript functions to handle adding items to the cart and checking out.
+
+javascript
+
+// static/js/scripts.js
+function addToCart(productId) {
+    fetch('/cart/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify({ product_id: productId, quantity: 1 })
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+    });
+}
+
+function checkout() {
+    fetch('/checkout/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+        window.location.href = '/order-history/';
+    });
+}
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+User Authentication
+
+Ensure users can log in and register.
+User Registration
+
+python
+
+# store/views.py
+class RegisterView(View):
+    def get(self, request):
+        return render(request, 'register.html')
+
+    def post(self, request):
+        username = request.POST['username']
+        password = request.POST['password']
+        user = User.objects.create_user(username=username, password=password)
+        user.save()
+        return redirect('login')
+
+html
+
+<!-- templates/register.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Register</h2>
+<form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" id="username" name="username" required>
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" name="password" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
+{% endblock %}
+
+User Login
+
+python
+
+# store/views.py
+from django.contrib.auth import authenticate, login
+
+class LoginView(View):
+    def get(self, request):
+        return render(request, 'login.html')
+
+    def post(self, request):
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('index')
+        else:
+            return render(request, 'login.html', {'error': 'Invalid credentials'})
+
+html
+
+<!-- templates/login.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Login</h2>
+{% if error %}
+<p class="text-danger">{{ error }}</p>
+{% endif %}
+<form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" id="username" name="username" required>
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" name="password" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Login</button>
+</form>
+{% endblock %}
+
+Additional Enhancements
+Search Functionality
+
+Add a search feature to find products.
+
+python
+
+# store/views.py
+class ProductSearchView(APIView):
+    def get(self, request):
+        query = request.GET.get('q')
+        products = Product.objects.filter(name__icontains=query)
+        return Response({'products': [{'id': product.id, 'name': product.name, 'price': product.price, 'quantity': product.quantity} for product in products]})
+
+python
+
+# store/urls.py
+from .views import ProductSearchView
+
+urlpatterns += [
+    path('search/', ProductSearchView.as_view(), name='product-search'),
+]
+
+html
+
+<!-- templates/index.html -->
+<form action="/search/" method="get" class="form-inline my-2 my-lg-0">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+</form>
+
+By implementing these steps, you will create a fully functional e-commerce website with a dynamic frontend, ensuring a smooth and engaging user experience.
+go on
+ChatGPT
+Additional Features and Enhancements
+
+Let's continue by adding some more features to our e-commerce website to enhance its functionality and user experience.
+Wishlist Feature
+
+Allow users to add products to a wishlist.
+
+    Model for Wishlist:
+
+python
+
+# store/models.py
+from django.contrib.auth.models import User
+
+class WishlistItem(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    added_at = models.DateTimeField(auto_now_add=True)
+
+    Views for Wishlist:
+
+python
+
+# store/views.py
+class WishlistView(View):
+    def get(self, request):
+        wishlist_items = WishlistItem.objects.filter(user=request.user)
+        return render(request, 'wishlist.html', {'wishlist_items': wishlist_items})
+
+class AddToWishlistView(View):
+    def post(self, request):
+        product_id = request.POST.get('product_id')
+        product = get_object_or_404(Product, id=product_id)
+        WishlistItem.objects.create(user=request.user, product=product)
+        return JsonResponse({'message': 'Added to wishlist'})
+
+class RemoveFromWishlistView(View):
+    def post(self, request):
+        product_id = request.POST.get('product_id')
+        WishlistItem.objects.filter(user=request.user, product_id=product_id).delete()
+        return JsonResponse({'message': 'Removed from wishlist'})
+
+    URLs for Wishlist:
+
+python
+
+# store/urls.py
+from .views import WishlistView, AddToWishlistView, RemoveFromWishlistView
+
+urlpatterns += [
+    path('wishlist/', WishlistView.as_view(), name='wishlist'),
+    path('wishlist/add/', AddToWishlistView.as_view(), name='add-to-wishlist'),
+    path('wishlist/remove/', RemoveFromWishlistView.as_view(), name='remove-from-wishlist'),
+]
+
+    Templates for Wishlist:
+
+html
+
+<!-- templates/wishlist.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Your Wishlist</h1>
+<ul class="list-group">
+    {% for item in wishlist_items %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        {{ item.product.name }}
+        <button class="btn btn-danger" onclick="removeFromWishlist({{ item.product.id }})">Remove</button>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
+
+    JavaScript Functions:
+
+javascript
+
+// static/js/scripts.js
+function addToWishlist(productId) {
+    fetch('/wishlist/add/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify({ product_id: productId })
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+    });
+}
+
+function removeFromWishlist(productId) {
+    fetch('/wishlist/remove/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify({ product_id: productId })
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+        location.reload();
+    });
+}
+
+Review and Rating System
+
+Allow users to leave reviews and rate products.
+
+    Model for Reviews:
+
+python
+
+# store/models.py
+class Review(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    rating = models.IntegerField(choices=[(i, str(i)) for i in range(1, 6)])
+    comment = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    Views for Reviews:
+
+python
+
+# store/views.py
+class AddReviewView(View):
+    def post(self, request, product_id):
+        product = get_object_or_404(Product, id=product_id)
+        rating = request.POST.get('rating')
+        comment = request.POST.get('comment')
+        Review.objects.create(user=request.user, product=product, rating=rating, comment=comment)
+        return redirect('product-detail', product_id=product.id)
+
+    URLs for Reviews:
+
+python
+
+# store/urls.py
+from .views import AddReviewView
+
+urlpatterns += [
+    path('products/<int:product_id>/review/', AddReviewView.as_view(), name='add-review'),
+]
+
+    Template for Adding Reviews:
+
+html
+
+<!-- templates/product_detail.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ product.name }}</h1>
+<p>Price: {{ product.price }}</p>
+<p>Quantity: {{ product.quantity }}</p>
+<button class="btn btn-success" onclick="addToCart({{ product.id }})">Add to Cart</button>
+
+<h3>Reviews</h3>
+<ul class="list-group">
+    {% for review in product.reviews.all %}
+    <li class="list-group-item">
+        <strong>{{ review.user.username }}</strong> - {{ review.rating }} stars
+        <p>{{ review.comment }}</p>
+    </li>
+    {% endfor %}
+</ul>
+
+<h3>Add a Review</h3>
+<form method="post" action="{% url 'add-review' product.id %}">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="rating">Rating</label>
+        <select id="rating" name="rating" class="form-control">
+            {% for i in "12345" %}
+            <option value="{{ i }}">{{ i }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="comment">Comment</label>
+        <textarea id="comment" name="comment" class="form-control"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}
+
+Enhancing User Profile
+
+Allow users to view and update their profile information.
+
+    Views for Profile:
+
+python
+
+# store/views.py
+class ProfileView(View):
+    def get(self, request):
+        return render(request, 'profile.html', {'user': request.user})
+
+    def post(self, request):
+        user = request.user
+        user.username = request.POST.get('username')
+        user.email = request.POST.get('email')
+        user.save()
+        return redirect('profile')
+
+    URLs for Profile:
+
+python
+
+# store/urls.py
+from .views import ProfileView
+
+urlpatterns += [
+    path('profile/', ProfileView.as_view(), name='profile'),
+]
+
+    Template for Profile:
+
+html
+
+<!-- templates/profile.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Profile</h1>
+<form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" id="username" name="username" value="{{ user.username }}" required>
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Update Profile</button>
+</form>
+{% endblock %}
+
+Order History
+
+Allow users to view their past orders.
+
+    Model for Orders:
+
+This is already included in the Order model defined earlier.
+
+    View for Order History:
+
+python
+
+# store/views.py
+class OrderHistoryView(View):
+    def get(self, request):
+        orders = Order.objects.filter(user=request.user)
+        return render(request, 'order_history.html', {'orders': orders})
+
+    URLs for Order History:
+
+python
+
+# store/urls.py
+from .views import OrderHistoryView
+
+urlpatterns += [
+    path('order-history/', OrderHistoryView.as_view(), name='order-history'),
+]
+
+    Template for Order History:
+
+html
+
+<!-- templates/order_history.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Order History</h1>
+<ul class="list-group">
+    {% for order in orders %}
+    <li class="list-group-item">
+        <h5>Order #{{ order.id }}</h5>
+        <ul>
+            {% for item in order.items.all %}
+            <li>{{ item.product.name }} (x{{ item.quantity }})</li>
+            {% endfor %}
+        </ul>
+        <p>Total: {{ order.total }}</p>
+        <p>Ordered on: {{ order.created_at }}</p>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
+
+Security and Best Practices
+
+    CSRF Protection: Ensure all forms and AJAX requests include CSRF tokens.
+    Authentication: Protect views that require user login using the @login_required decorator.
+    Validation: Add server-side validation for all inputs to prevent invalid data submission.
+    Error Handling: Implement proper error handling and user-friendly error messages.
+
+Deployment
+
+Deploy your Django application using a reliable hosting service like Heroku, AWS, or DigitalOcean. Ensure you have set up a production-ready database (e.g., PostgreSQL), configured static files storage (e.g., AWS S3), and used a secure server (e.g., Gunicorn
+go on
+ChatGPT
+Deployment Steps
+
+Deploying your Django application involves several steps to ensure it is production-ready, secure, and performant. Below are the steps to deploy your Django e-commerce application using Heroku as an example.
+1. Prepare the Django Project for Deployment
+
+    Update settings.py:
+
+        Allowed Hosts: Add your domain or '*' for all hosts.
+
+        python
+
+ALLOWED_HOSTS = ['yourdomain.com', 'your-app.herokuapp.com']
+
+Static Files Configuration: Configure static files settings.
+
+python
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+Database Configuration: Use dj-database-url to configure the database.
+
+python
+
+import dj_database_url
+
+DATABASES = {
+    'default': dj_database_url.config(default='postgres://user:password@localhost:5432/mydatabase')
+}
+
+Security Settings: Set secure settings for production.
+
+python
+
+    DEBUG = False
+    SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'default-secret-key')
+
+Create Procfile:
+
+text
+
+web: gunicorn your_project_name.wsgi
+
+Create runtime.txt:
+
+text
+
+python-3.9.6
+
+Install Gunicorn and dj-database-url:
+
+bash
+
+pip install gunicorn dj-database-url
+
+Update requirements.txt:
+
+bash
+
+pip freeze > requirements.txt
+
+Install Heroku CLI (if not already installed):
+
+bash
+
+    curl https://cli-assets.heroku.com/install.sh | sh
+
+2. Deploy to Heroku
+
+    Log in to Heroku:
+
+    bash
+
+heroku login
+
+Create a New Heroku App:
+
+bash
+
+heroku create your-app-name
+
+Add Heroku Remote Repository:
+
+bash
+
+git remote add heroku https://git.heroku.com/your-app-name.git
+
+Set Environment Variables:
+
+bash
+
+heroku config:set DJANGO_SECRET_KEY='your-secret-key'
+
+Deploy the Application:
+
+bash
+
+git push heroku main
+
+Run Migrations:
+
+bash
+
+heroku run python manage.py migrate
+
+Collect Static Files:
+
+bash
+
+    heroku run python manage.py collectstatic
+
+3. Set Up a Production Database
+
+    Provision a Heroku Postgres Database:
+
+    bash
+
+heroku addons:create heroku-postgresql:hobby-dev
+
+Check Database URL:
+
+bash
+
+    heroku config:get DATABASE_URL
+
+    Update Your settings.py:
+
+    Ensure dj-database-url is used to configure the database.
+
+4. Set Up Static Files Hosting (Optional)
+
+For better performance, you can host static files on a service like AWS S3.
+
+    Install boto3 and django-storages:
+
+    bash
+
+pip install boto3 django-storages
+
+Update settings.py for AWS S3:
+
+python
+
+INSTALLED_APPS += ['storages']
+
+AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+
+Set AWS Credentials in Heroku:
+
+bash
+
+    heroku config:set AWS_ACCESS_KEY_ID='your-aws-access-key-id'
+    heroku config:set AWS_SECRET_ACCESS_KEY='your-aws-secret-access-key'
+    heroku config:set AWS_STORAGE_BUCKET_NAME='your-s3-bucket-name'
+
+Post-Deployment Steps
+
+    Monitoring and Logging:
+        Use Heroku add-ons like Papertrail for logging and New Relic for performance monitoring.
+
+    Error Tracking:
+        Integrate services like Sentry for real-time error tracking.
+
+    Regular Backups:
+        Set up automated backups for your database using Heroku Postgres' backup feature.
+
+    Security Audits:
+        Regularly perform security audits and updates to ensure the application remains secure.
+
+    Scaling:
+        Scale your dynos and database as needed based on the application's traffic and performance requirements.
+
+By following these steps, you will have a robust, secure, and scalable e-commerce application deployed and running in a production environment.
+make it look like amazon store
+ChatGPT
+
+Creating a frontend for your Django e-commerce application that looks like Amazon involves several key components: the overall design, navigation, product listings, and user interface elements. To achieve this, you'll need to work with HTML, CSS, JavaScript, and a frontend framework like Bootstrap for responsive design. Below is a simplified example of how you can structure your templates and static files to mimic the look and feel of Amazon.
+1. Base Template
+
+Start with a base template that includes the common elements like the header, footer, and navigation menu. This template will be extended by other specific pages like the home page, product listing page, and product detail page.
+base.html
+
+html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My E-commerce Store{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">MyStore</a>
+            <form class="form-inline my-2 my-lg-0 ml-auto" action="{% url 'search' %}" method="get">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'cart' %}">Cart</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </header>
+
+    <main class="container mt-4">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="bg-dark text-white text-center py-3 mt-4">
+        <p>&copy; 2024 My E-commerce Store. All rights reserved.</p>
+    </footer>
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
+
+2. Home Page
+
+The home page will feature categories, popular products, and other promotional content.
+home.html
+
+html
+
+{% extends 'base.html' %}
+
+{% block title %}Home - MyStore{% endblock %}
+
+{% block content %}
+<div class="jumbotron text-center">
+    <h1>Welcome to MyStore</h1>
+    <p>Find the best products at the best prices.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <h3>Categories</h3>
+        <ul class="list-group">
+            {% for category in categories %}
+            <li class="list-group-item">
+                <a href="{% url 'category' category.id %}">{{ category.name }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="col-md-9">
+        <h3>Popular Products</h3>
+        <div class="row">
+            {% for product in popular_products %}
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">{{ product.description|truncatewords:20 }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a href="{% url 'product_detail' product.id %}" class="btn btn-sm btn-outline-secondary">View</a>
+                                <a href="{% url 'add_to_cart' product.id %}" class="btn btn-sm btn-outline-secondary">Add to Cart</a>
+                            </div>
+                            <small class="text-muted">${{ product.price }}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+3. Product Listing Page
+
+The product listing page will show all products in a specific category with pagination.
+category.html
+
+html
+
+{% extends 'base.html' %}
+
+{% block title %}{{ category.name }} - MyStore{% endblock %}
+
+{% block content %}
+<h2>{{ category.name }}</h2>
+
+<div class="row">
+    {% for product in products %}
+    <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+            <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">{{ product.description|truncatewords:20 }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                        <a href="{% url 'product_detail' product.id %}" class="btn btn-sm btn-outline-secondary">View</a>
+                        <a href="{% url 'add_to_cart' product.id %}" class="btn btn-sm btn-outline-secondary">Add to Cart</a>
+                    </div>
+                    <small class="text-muted">${{ product.price }}</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if products.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ products.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ products.number }} of {{ products.paginator.num_pages }}.
+        </span>
+
+        {% if products.has_next %}
+            <a href="?page={{ products.next_page_number }}">next</a>
+            <a href="?page={{ products.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}
+
+4. Product Detail Page
+
+The product detail page will display the product's full details.
+product_detail.html
+
+html
+
+{% extends 'base.html' %}
+
+{% block title %}{{ product.name }} - MyStore{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <img src="{{ product.image.url }}" class="img-fluid" alt="{{ product.name }}">
+    </div>
+    <div class="col-md-6">
+        <h2>{{ product.name }}</h2>
+        <p>{{ product.description }}</p>
+        <h4>${{ product.price }}</h4>
+        <a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary">Add to Cart</a>
+    </div>
+</div>
+{% endblock %}
+
+5. CSS and JavaScript
+style.css
+
+css
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.jumbotron {
+    background-color: #f8f9fa;
+    margin-bottom: 2rem;
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.navbar {
+    margin-bottom: 2rem;
+}
+
+footer {
+    margin-top: 2rem;
+}
+
+main.js
+
+javascript
+
+// Add any custom JavaScript here
+
+Directory Structure
+
+arduino
+
+your_project/
+    ├── static/
+    │   ├── css/
+    │   │   └── style.css
+    │   ├── js/
+    │   │   ├── bootstrap.bundle.min.js
+    │   │   ├── jquery.min.js
+    │   │   └── main.js
+    │   └── images/
+    ├── templates/
+    │   ├── base.html
+    │   ├── home.html
+    │   ├── category.html
+    │   └── product_detail.html
+    ├── manage.py
+    └── your_project_name/
+        ├── __init__.py
+        ├── settings.py
+        ├── urls.py
+        ├── wsgi.py
+        ├── asgi.py
+        └── ...
+
+Backend Views and URL Configuration
+Views
+
+Add views to handle the rendering of these templates.
+
+python
+
+from django.shortcuts import render, get_object_or_404
+from .models import Category, Product
+
+def home(request):
+    categories = Category.objects.all()
+    popular_products = Product.objects.order_by('-popularity')[:6]
+    return render(request, 'home.html', {'categories': categories, 'popular_products': popular_products})
+
+def category_detail(request, category_id):
+    category = get_object_or_404(Category, pk=category_id)
+    products = Product.objects.filter(category=category)
+    return render(request, 'category.html', {'category': category, 'products': products})
+
+def product_detail(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    return render(request, 'product_detail.html', {'product': product})
+
+URLs
+
+Configure URLs to route to these views.
+
+python
+
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.home, name='home'),
+    path('category/<int:category_id>/', views.category_detail, name='category'),
+    path('product/<int:product_id>/', views.product_detail, name='product_detail'),
+    # Other URLs for login, signup, cart, etc.
+]
+
+This setup provides a starting point for building an Amazon-like e-commerce site with Django. You can further customize and enhance it by adding more features, styles, and functionalities as needed.
+go on
+ChatGPT
+Additional Features and Enhancements
+
+To further enhance your e-commerce site and make it more user-friendly and functional, consider implementing the following features:
+1. User Authentication
+
+Create views and templates for user registration, login, and profile management.
+views.py
+
+python
+
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.shortcuts import redirect
+
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('home')
+    else:
+        form = UserCreationForm()
+    return render(request, 'signup.html', {'form': form})
+
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('home')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'login.html', {'form': form})
+
+def logout_view(request):
+    if request.method == 'POST':
+        logout(request)
+        return redirect('home')
+
+urls.py
+
+python
+
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('signup/', views.signup, name='signup'),
+    path('login/', views.login_view, name='login'),
+    path('logout/', views.logout_view, name='logout'),
+]
+
+signup.html
+
+html
+
+{% extends 'base.html' %}
+
+{% block title %}Sign Up - MyStore{% endblock %}
+
+{% block content %}
+<h2>Sign Up</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Sign Up</button>
+</form>
+{% endblock %}
+
+login.html
+
+html
+
+{% extends 'base.html' %}
+
+{% block title %}Login - MyStore{% endblock %}
+
+{% block content %}
+<h2>Login</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Login</button>
+</form>
+{% endblock %}
+
+2. Shopping Cart
+
+Implementing a shopping cart involves creating views for adding items to the cart, displaying the cart, and handling the checkout process.
+views.py
+
+python
+
+from django.shortcuts import render, redirect
+from .models import Product
+
+def add_to_cart(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    cart = request.session.get('cart', {})
+    cart[product_id] = cart.get(product_id, 0) + 1
+    request.session['cart'] = cart
+    return redirect('cart')
+
+def view_cart(request):
+    cart = request.session.get('cart', {})
+    cart_items = []
+    total_price = 0
+    for product_id, quantity in cart.items():
+        product = get_object_or_404(Product, id=product_id)
+        cart_items.append({'product': product, 'quantity': quantity, 'subtotal': product.price * quantity})
+        total_price += product.price * quantity
+    return render(request, 'cart.html', {'cart_items': cart_items, 'total_price': total_price})
+
+def checkout(request):
+    # Implement the checkout logic here
+    return render(request, 'checkout.html')
+
+urls.py
+
+python
+
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('cart/', views.view_cart, name='cart'),
+    path('cart/add/<int:product_id>/', views.add_to_cart, name='add_to_cart'),
+    path('checkout/', views.checkout, name='checkout'),
+]
+
+cart.html
+
+html
+
+{% extends 'base.html' %}
+
+{% block title %}Shopping Cart - MyStore{% endblock %}
+
+{% block content %}
+<h2>Your Shopping Cart</h2>
+{% if cart_items %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart_items %}
+            <tr>
+                <td>{{ item.product.name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>${{ item.subtotal }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h3>Total: ${{ total_price }}</h3>
+    <a href="{% url 'checkout' %}" class="btn btn-primary">Proceed to Checkout</a>
+{% else %}
+    <p>Your cart is empty.</p>
+{% endif %}
+{% endblock %}
+
+checkout.html
+
+html
+
+{% extends 'base.html' %}
+
+{% block title %}Checkout - MyStore{% endblock %}
+
+{% block content %}
+<h2>Checkout</h2>
+<p>Implement the checkout form and payment processing here.</p>
+{% endblock %}
+
+3. Improving the Frontend with Bootstrap and Custom CSS
+
+To give the frontend a more polished and professional look similar to Amazon, use Bootstrap components and customize them with your own CSS.
+style.css
+
+css
+
+body {
+    font-family: 'Arial', sans-serif;
+}
+
+.jumbotron {
+    background-image: url('{% static "images/hero-banner.jpg" %}');
+    background-size: cover;
+    color: white;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+.navbar {
+    margin-bottom: 2rem;
+}
+
+.card {
+    margin-bottom: 2rem;
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+footer {
+    margin-top: 2rem;
+}
+
+.btn-primary {
+    background-color: #ff9900;
+    border-color: #ff9900;
+}
+
+main.js
+
+javascript
+
+// Add any custom JavaScript here
+
+Final Directory Structure
+
+arduino
+
+your_project/
+    ├── static/
+    │   ├── css/
+    │   │   └── style.css
+    │   ├── js/
+    │   │   ├── bootstrap.bundle.min.js
+    │   │   ├── jquery.min.js
+    │   │   └── main.js
+    │   └── images/
+    │       └── hero-banner.jpg
+    ├── templates/
+    │   ├── base.html
+    │   ├── home.html
+    │   ├── category.html
+    │   ├── product_detail.html
+    │   ├── cart.html
+    │   ├── checkout.html
+    │   ├── signup.html
+    │   └── login.html
+    ├── manage.py
+    └── your_project_name/
+        ├── __init__.py
+        ├── settings.py
+        ├── urls.py
+        ├── wsgi.py
+        ├── asgi.py
+        └── ...
+
+Further Steps
+
+    Add Product Reviews and Ratings: Allow users to leave reviews and rate products.
+    Implement Payment Gateway: Integrate a payment gateway like Stripe or PayPal for handling payments.
+    Improve Search Functionality: Implement a more advanced search with filters and sorting options.
+    Responsive Design: Ensure the site is fully responsive and looks good on all devices.
+    Optimize Performance: Use techniques like lazy loading, caching, and minification to improve site performance.
+    Add Security Features: Implement security best practices to protect user data and prevent attacks.
+
+With these enhancements, your Django-based e-commerce store will offer a rich and user-friendly experience similar to Amazon.
+do have every thing this base.html  code in here
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheese E-commerce Store</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-Neyyh/LuUjtNdZvwttaSBbJUiE7iOFvTizV3jQbVIQ5jYlUS8EyVSM6oZwF/ljM7tEkBdLiAkAStVu2t0y+57Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header id="navbar-main"
+        class="nav-opt-sprite nav-flex nav-locale-us nav-lang-en nav-ssl nav-unrec nav-progressive-attribute">
+        <div id="navbar" role="navigation" aria-label="navigation"
+            class="nav-sprite-v1 celwidget nav-bluebeacon nav-a11y-t1 bold-focus-hover layout2 nav-flex layout3 layout3-alt nav-packard-glow hamburger nav-progressive-attribute">
+            <div id="nav-belt">
+                <div class="nav-left">
+                    <div id="nav-logo">
+                        <a href="{% static 'img/logo.png' %}" id="nav-logo-sprites"
+                            class="nav-logo-link nav-progressive-attribute" aria-label="Cheese">
+                            <span class="nav-sprite nav-logo-base"></span>
+                            <span id="logo-ext" class="nav-sprite nav-logo-ext nav-progressive-content"></span>
+                            <span class="nav-logo-locale">.us</span>
+                        </a>
+                    </div>
+                    <div id="nav-global-location-slot"></div>
+                    <div class="nav-left">
+                        <li class="nav-item {% if request.path == '/' %}active{% endif %}">
+                            <a href="" class="nav-a nav-a-2 nav-progressive-attribute" id="nav-home" tabindex="">
+                                <span class="nav-line-2">Home<span class="nav-icon nav-arrow"></span></span>
+                            </a>
+                        </li>
+                    </div>
+                </div>
+                <div class="nav-fill">
+                    <div id="nav-search">
+                        <div id="nav-bar-left"></div>
+                        <div id="vsar-nav-image-search" class="vsar-img-panel-is-hidden">
+                            <div id="vsar-img-panel-container">
+                                <img id="vsar-img-close-btn" class="vsar-img-close-btn"
+                                    src="https://example.com/images/close-large.png">
+                                <div id="vsar-img-panel-header">
+                                    <div class="vsar-lens-branding">
+                                        <img class="vsar-branding-lens-logo" id="vsar-branding-lens-logo"
+                                            src="https://example.com/images/cheese-lens-branding-icon.png">
+                                        <div class="vsar-branding-cheese-text">
+                                            <p>Cheese</p>
+                                        </div>
+                                        <div class="vsar-branding-lens-text">
+                                            <p>lens</p>
+                                        </div>
+                                    </div>
+                                    <p class="vsar-lens-upload-img-desc">Search with any image</p>
+                                </div>
+
+                                <div id="vsar-invalid-file-type-img"
+                                    class="a-box a-alert a-alert-error aok-hidden vsar-alert" role="alert">
+                                    <div class="a-box-inner a-alert-container">
+                                        <h4 class="a-alert-heading">Unsupported image file format.</h4>
+                                        <i class="a-icon a-icon-alert"></i>
+                                        <div class="a-alert-content">Upload a JPEG, PNG, WEBP, GIF, SVG, AVIF, BMP, ICO
+                                            image file.</div>
+                                    </div>
+                                </div>
+
+                                <div id="vsar-invalid-file-size-img"
+                                    class="a-box a-alert a-alert-error aok-hidden vsar-alert" role="alert">
+                                    <div class="a-box-inner a-alert-container">
+                                        <h4 class="a-alert-heading">Image file size is too large.</h4>
+                                        <i class="a-icon a-icon-alert"></i>
+                                        <div class="a-alert-content">Upload an image file size of 5MB or less.</div>
+                                    </div>
+                                </div>
+
+                                <div id="vsar-img-panel-upload-area">
+                                    <div id="vsar-img-content-top">
+                                        <div class="vsar-gallery-icon"><img id="vsar-gallery-icon-img"
+                                                src="https://example.com/images/gallery-image.png">
+                                        </div>
+                                        <div class="vsar-img-drag-text">
+                                            <p>Drag an image here</p>
+                                        </div>
+                                    </div>
+                                    <div id="vsar-img-content-bottom">
+                                        <button name="vsar-img-upload-btn" id="vsar-img-upload-btn"
+                                            class="a-button a-button-primary" type="button">
+                                            <label class="a-button-text" for="vsar_img_file">Upload an image</label>
+                                        </button>
+                                        <input type="file" id="vsar_img_file" accept="image/avif,image/*"
+                                            class="vsar-upload-file" style="display:none;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <form id="nav-search-bar-form" accept-charset="utf-8" action=""
+                            class="nav-searchbar nav-progressive-attribute" method="GET" name="site-search"
+                            role="search">
+                            <div class="nav-left">
+                                <div id="nav-search-dropdown-card">
+                                    <div class="nav-search-scope nav-sprite">
+                                        <div class="nav-search-facade" data-value="search-alias=aps">
+                                            <span id="nav-search-label-id"
+                                                class="nav-search-label nav-progressive-content"
+                                                style="width: auto;">All</span>
+                                            <i class="nav-icon"></i>
+                                        </div>
+                                        <label id="searchDropdownDescription" for="searchDropdownBox"
+                                            class="nav-progressive-attribute" style="display:none">
+                                            Select the department you want to search in
+                                        </label>
+                                        <select aria-describedby="searchDropdownDescription"
+                                            class="nav-search-dropdown searchSelect nav-progressive-attribute nav-progressive-search-dropdown"
+                                            data-nav-digest="k+fyIAyB82R9jVEmroQ0OWwSW3A=" data-nav-selected="0"
+                                            id="searchDropdownBox" name="url" style="display: block; top: 2.5px;"
+                                            tabindex="0" title="Search in">
+                                            <option selected="selected" value="search-alias=aps">All Departments
+                                            </option>
+                                            <option value="search-alias=arts-crafts-intl-ship">Arts &amp; Crafts
+                                            </option>
+                                            <option value="search-alias=automotive-intl-ship">Automotive</option>
+                                            <option value="search-alias=baby-products-intl-ship">Baby</option>
+                                            <option value="search-alias=beauty-intl-ship">Beauty &amp; Personal Care
+                                            </option>
+                                            <option value="search-alias=stripbooks-intl-ship">Books</option>
+                                            <option value="search-alias=electronics-intl-ship">Computers, Digital Music
+                                                &amp; Electronics</option>
+                                            <option value="search-alias=tools-intl-ship">Gift Card &amp; Home
+                                                Improvement</option>
+                                            <option value="search-alias=hpc-intl-ship">Health &amp; Household</option>
+                                            <option value="search-alias=kitchen-intl-ship">Home &amp; Kitchen</option>
+                                            <option value="search-alias=industrial-intl-ship">Industrial &amp;
+                                                Scientific</option>
+                                            <option value="search-alias=fashion-male-intl-ship">Men's &amp; Boys'
+                                                Fashion</option>
+                                            <option value="search-alias=movies-tv-intl-ship">Movies, Games &amp; Music
+                                            </option>
+                                            <option value="search-alias=fashion-female-intl-ship">Women's &amp; Girls'
+                                                Fashion</option>
+                                            <option value="search-alias=software-intl-ship">Software</option>
+                                            <option value="search-alias=sporting-intl-ship">Sports &amp; Outdoors
+                                            </option>
+                                            <option value="search-alias=tools-intl-ship">Tools &amp; Home Improvement
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="nav-fill">
+                                <div class="nav-search-field">
+                                    <label for="twotabsearchtextbox" style="display: none;">Search Cheese</label>
+                                    <input type="text" id="twotabsearchtextbox" value="" name="field-keywords"
+                                        autocomplete="off" placeholder="Search Cheese"
+                                        class="nav-input nav-progressive-attribute" dir="auto" tabindex="0"
+                                        aria-label="Search Cheese" spellcheck="false">
+                                </div>
+                                <div id="nav-iss-attach"></div>
+                                <div id="nav-vsar-lens-container" class="nav-search-field">
+                                    <img class="vsar-lens-icon" id="vsar-lens-icon-img"
+                                        src="https://example.com/images/MLT_Icon_x2.png">
+                                </div>
+                            </div>
+                            <div class="nav-right">
+                                <div class="nav-search-submit nav-sprite">
+                                    <span id="nav-search-submit-text"
+                                        class="nav-search-submit-text nav-sprite nav-progressive-attribute"
+                                        aria-label="Go">
+                                        <input id="nav-search-submit-button" type="submit"
+                                            class="nav-input nav-progressive-attribute" value="Go" tabindex="0">
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="nav-right">
+                    <div id="nav-tools" class="layoutToolbarPadding">
+                        <a href="/customer-preferences/edit?ie=UTF8&amp;preferencesReturnUrl=%2Fref%3Dnav_logo&amp;ref_=topnav_lang_ais"
+                            id="icp-nav-flyout" class="nav-a nav-a-2 icp-link-style-2"
+                            aria-label="Choose a language for shopping.">
+                            <span class="icp-nav-link-inner">
+                                <span class="nav-line-1">
+                                </span>
+                                <span class="nav-line-2">
+                                    <span class="icp-nav-flag icp-nav-flag-us icp-nav-flag-lop"></span>
+                                    <div>EN</div>
+                                    <span class="nav-icon nav-arrow" style="visibility: visible;"></span>
+                                </span>
+                            </span>
+                        </a>
+                        <a href="" class="nav-a nav-a-2   nav-progressive-attribute" data-nav-ref="nav_ya_signin"
+                            data-nav-role="signin" data-ux-jq-mouseenter="true" id="nav-link-accountList" tabindex="0"
+                            data-csa-c-type="link" data-csa-c-slot-id="nav-link-accountList"
+                            data-csa-c-content-id="nav_ya_signin" data-csa-c-id="ucpcw6-fo03tl-xdk3wl-tndqul">
+                            <div class="nav-line-1-container"><span id="nav-link-accountList-nav-line-1"
+                                    class="nav-line-1 nav-progressive-content">Hello, sign in</span></div>
+                            <span class="nav-line-2 ">Account &amp; Lists<span class="nav-icon nav-arrow" 10
+                                    style="visibility: visible;"></span>
+                            </span>
+                        </a>
+                        <a href="/order_history?ref_=nav_orders_first" class="nav-a nav-a-2   nav-progressive-attribute"
+                            id="nav-orders" tabindex="0">
+                            <span class="nav-line-1">Returns</span>
+                            <span class="nav-line-2">&amp; Orders<span class="nav-icon nav-arrow"></span></span>
+                        </a>
+                        <a href="/cart/cart.html?ref_=nav_cart" aria-label="0 items in cart"
+                            class="nav-a nav-a-2 nav-progressive-attribute" id="nav-cart">
+                            <div id="nav-cart-count-container">
+                                <span id="nav-cart-count" aria-hidden="true"
+                                    class="nav-cart-count nav-cart-0 nav-progressive-attribute nav-progressive-content">0</span>
+                                <span class="nav-cart-icon nav-sprite"></span>
+                            </div>
+                            <div id="nav-cart-text-container" class=" nav-progressive-attribute">
+                                <span aria-hidden="true" class="nav-line-1">
+                                </span>
+                                <span aria-hidden="true" class="nav-line-2">
+                                    Cart
+                                    <span class="nav-icon nav-arrow"></span>
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="nav-flyout-iss-anchor">
+                <div id="nav-flyout-searchAjax" class="nav-issFlyout nav-flyout">
+                    <div class="nav-template nav-flyout-content"></div>
+                    <div class="autocomplete-results-container">
+                        <div class="two-pane-results-container">
+                            <div class="left-pane-results-container"></div>
+                            <div class="right-pane-results-container"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="nav-flyout-anchor">
+                <div id="nav-flyout-amazonprime" class="nav-coreFlyout nav-flyout">
+                    <div class="nav-arrow">
+                        <div class="nav-arrow-inner"></div>
+                    </div>
+                </div>
+                <div id="nav-flyout-accountList" class="nav-coreFlyout nav-flyout">
+                    <div class="nav-arrow">
+                        <div class="nav-arrow-inner"></div>
+                    </div>
+                    <div class="nav-template nav-flyout-content">
+                        <div id="nav-al-container">
+                            <div id="nav-al-signin">
+                                <div id="nav-flyout-ya-signin" class="nav-flyout-content nav-flyout-accessibility">
+                                    <a href="/login" rel="nofollow" class="nav-action-signin-button"
+                                        data-nav-role="signin" data-nav-ref="nav_signin">
+                                        <span class="nav-action-inner">Sign in</span>
+                                    </a>
+                                    <div id="nav-flyout-ya-newCust"
+                                        class="nav_pop_new_cust nav-flyout-content nav-flyout-accessibility">
+                                        New customer?
+                                        <a href="/signup" rel="nofollow" class="nav-a">Start here.</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="nav-al-wishlist"
+                                class="nav-al-column nav-tpl-itemList nav-flyout-content nav-flyout-accessibility">
+                                <div class="nav-title" id="nav-al-title">Your Lists</div>
+                                <a href="" class="nav-link nav-item">
+                                    <span class="nav-text">Create a List</span>
+                                </a>
+                                <a href="" class="nav-link nav-item">
+                                    <span class="nav-text">Find a List or Registry</span>
+                                </a>
+                            </div>
+                            <div id="nav-al-your-account"
+                                class="nav-al-column nav-template nav-flyout-content nav-tpl-itemList nav-flyout-accessibility">
+                                <div class="nav-title">Your Account</div>
+                                <a href="" class="nav-link nav-item">
+                                    <span class="nav-text">Account</span>
+                                </a>
+                                <a id="nav_prefetch_yourorders" href="" class="nav-link nav-item">
+                                    <span class="nav-text">Orders</span>
+                                </a>
+                                <a href="/gp/yourstore?ref_=nav_AccountFlyout_recs" class="nav-link nav-item">
+                                    <span class="nav-text">Recommendations</span>
+                                </a>
+                                <a href="/gp/history?ref_=nav_AccountFlyout_browsinghistory" class="nav-link nav-item">
+                                    <span class="nav-text">Browsing History</span>
+                                </a>
+                                <a href="/gp/video/watchlist?ref_=nav_AccountFlyout_ywl" class="nav-link nav-item">
+                                    <span class="nav-text">Watchlist</span>
+                                </a>
+                                <a href="/gp/video/library?ref_=nav_AccountFlyout_yvl" class="nav-link nav-item">
+                                    <span class="nav-text">Video Purchases &amp; Rentals</span>
+                                </a>
+                                <a href="/gp/kindle/ku/ku_central?ref_=nav_AccountFlyout_ku" class="nav-link nav-item">
+                                    <span class="nav-text">Kindle Unlimited</span>
+                                </a>
+                                <a href="/hz/mycd/myx?pageType=content&amp;ref_=nav_AccountFlyout_myk"
+                                    class="nav-link nav-item">
+                                    <span class="nav-text">Content &amp; Devices</span>
+                                </a>
+                                <a href="/gp/subscribe-and-save/manager/viewsubscriptions?ref_=nav_AccountFlyout_sns"
+                                    class="nav-link nav-item">
+                                    <span class="nav-text">Subscribe &amp; Save Items</span>
+                                </a>
+                                <a href="/hz5/yourmembershipsandsubscriptions?ref_=nav_AccountFlyout_digital_subscriptions"
+                                    class="nav-link nav-item">
+                                    <span class="nav-text">Memberships &amp; Subscriptions</span>
+                                </a>
+                                <a href="" class="nav-link nav-item">
+                                    <span class="nav-text">Music Library</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="nav-main" class="nav-sprite">
+                <div class="nav-left">
+                    <script type="text/javascript">window.navmet.tmp = +new Date();</script>
+                    <a href="/product" id="nav-hamburger-menu" role="button" aria-label="Open Menu"
+                        data-csa-c-type="widget" data-csa-c-slot-id="HamburgerMenuDesktop"
+                        data-csa-c-interaction-events="click" data-csa-c-id="h0yi58-va24mo-i96e8l-jlmv3q">
+                        <i class="hm-icon nav-sprite"></i>
+                        <span class="hm-icon-label">All</span>
+                    </a>
+                </div>
+                <div class="nav-fill">
+                    <div id="nav-shop"></div>
+                    <div id="nav-xshop-container">
+                        <div id="nav-xshop" class="nav-progressive-content">
+                            <script type="text/javascript">window.navmet.tmp = +new Date();</script>
+                            <a href="/gp/goldbox?ref_=nav_cs_gb" class="nav-a" tabindex="0" data-csa-c-type="link"
+                                data-csa-c-slot-id="nav_cs_0" data-csa-c-content-id="nav_cs_gb"
+                                data-csa-c-id="ml6183-4r02qf-rkgdxj-9g3hrg">Today's Deals</a>
+                            <a href="/help/customer/display.htm;" class="nav-a" tabindex="0" data-csa-c-type="link"
+                                data-csa-c-slot-id="nav_cs_1" data-csa-c-content-id="nav_cs_customerservice"
+                                data-csa-c-id="ip9nar-klace9-q2ag5b-dxn696">Customer Service</a>
+                            <a href="/testimonial" class="nav-a" tabindex="0" data-csa-c-type="link"
+                                data-csa-c-slot-id="nav_cs_2" data-csa-c-content-id="nav_cs_registry"
+                                data-csa-c-id="kycp3d-l7m96z-zqeos-fy2mcr">Testimonial</a>
+                            <a href="/gift-cards" class="nav-a" tabindex="0" data-csa-c-type="link"
+                                data-csa-c-slot-id="nav_cs_3" data-csa-c-content-id="nav_cs_gc"
+                                data-csa-c-id="7x1d6s-a9ixj7-2cixev-itph92">Gift
+                                Cards</a>
+                            <a href="" class="nav-a" tabindex="0" data-csa-c-type="link" data-csa-c-slot-id="nav_cs_4"
+                                data-csa-c-content-id="nav_cs_sell" data-csa-c-id="qip066-ll1dvx-yottvy-s5k2pz">Crypto
+                                Sell &amp; Buy</a>
+                            <a href="/content"
+                                aria-label="Click to call our Disability Customer Support line, or reach us directly at 1-888-283-1678"
+                                class="nav-hidden-aria" tabindex="0" data-csa-c-type="link"
+                                data-csa-c-slot-id="nav_cs_5" data-csa-c-id="uuvv5z-1ohaec-lqr89a-7xhyzj">Disability
+                                Customer Support</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-right">
+                    <div id="nav-swmslot">
+                        <!-- Scheduled SWM widget failed to render -->
+                    </div>
+                </div>
+            </div>
+            <div id="nav-subnav-toaster"></div>
+            <div id="nav-progressive-subnav"></div>
+        </div>
+    </header>
+    <div class="hero-container">
+        {% block hero-container %}
+        {% endblock hero-container %}
+    </div>
+    <!-- Main Content Area -->
+    <div class="container mt-5">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <!-- Footer -->
+    <footer class="text-center py-1">
+        <div class="container">
+            <p>&copy; 2024 E-commerce Store. All rights reserved.</p>
+        </div>
+    </footer>
+    <!-- Bootstrap and Custom Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>
+ChatGPT
+
+Sure, here's the base.html code with the provided content:
+
+html
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheese E-commerce Store</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-Neyyh/LuUjtNdZvwttaSBbJUiE7iOFvTizV3jQbVIQ5jYlUS8EyVSM6oZwF/ljM7tEkBdLiAkAStVu2t0y+57Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header id="navbar-main"
+        class="nav-opt-sprite nav-flex nav-locale-us nav-lang-en nav-ssl nav-unrec nav-progressive-attribute">
+        <div id="navbar" role="navigation" aria-label="navigation"
+            class="nav-sprite-v1 celwidget nav-bluebeacon nav-a11y-t1 bold-focus-hover layout2 nav-flex layout3 layout3-alt nav-packard-glow hamburger nav-progressive-attribute">
+            <div id="nav-belt">
+                <div class="nav-left">
+                    <div id="nav-logo">
+                        <a href="{% static 'img/logo.png' %}" id="nav-logo-sprites"
+                            class="nav-logo-link nav-progressive-attribute" aria-label="Cheese">
+                            <span class="nav-sprite nav-logo-base"></span>
+                            <span id="logo-ext" class="nav-sprite nav-logo-ext nav-progressive-content"></span>
+                            <span class="nav-logo-locale">.us</span>
+                        </a>
+                    </div>
+                    <div id="nav-global-location-slot"></div>
+                    <div class="nav-left">
+                        <li class="nav-item {% if request.path == '/' %}active{% endif %}">
+                            <a href="" class="nav-a nav-a-2 nav-progressive-attribute" id="nav-home" tabindex="">
+                                <span class="nav-line-2">Home<span class="nav-icon nav-arrow"></span></span>
+                            </a>
+                        </li>
+                    </div>
+                </div>
+                <div class="nav-fill">
+                    <div id="nav-search">
+                        <div id="nav-bar-left"></div>
+                        <div id="vsar-nav-image-search" class="vsar-img-panel-is-hidden">
+                            <div id="vsar-img-panel-container">
+                                <img id="vsar-img-close-btn" class="vsar-img-close-btn"
+                                    src="https://example.com/images/close-large.png">
+                                <div id="vsar-img-panel-header">
+                                    <div class="vsar-lens-branding">
+                                        <img class="vsar-branding-lens-logo" id="vsar-branding-lens-logo"
+                                            src="https://example.com/images/cheese-lens-branding-icon.png">
+                                        <div class="vsar-branding-cheese-text">
+                                            <p>Cheese</p>
+                                        </div>
+                                        <div class="vsar-branding-lens-text">
+                                            <p>lens</p>
+                                        </div>
+                                    </div>
+                                    <p class="vsar-lens-upload-img-desc">Search with any image</p>
+                                </div>
+
+                                <div id="vsar-invalid-file-type-img"
+                                    class="a-box a-alert a-alert-error aok-hidden vsar-alert" role="alert">
+                                    <div class="a-box-inner a-alert-container">
+                                        <h4 class="a-alert-heading">Unsupported image file format.</h4>
+                                        <i class="a-icon a-icon-alert"></i>
+                                        <div class="a-alert-content">Upload a JPEG, PNG, WEBP, GIF, SVG, AVIF, BMP, ICO
+                                            image file.</div>
+                                    </div>
+                                </div>
+
+                                <div id="vsar-invalid-file-size-img"
+                                    class="a-box a-alert a-alert-error aok-hidden vsar-alert" role="alert">
+                                    <div class="a-box-inner a-alert-container">
+                                        <h4 class="a-alert-heading">Image file size is too large.</h4>
+                                        <i class="a-icon a-icon-alert"></i>
+                                        <div class="a-alert-content">Upload an image file size of 5MB or less.</div>
+                                    </div>
+                                </div>
+
+                                <div id="vsar-img-panel-upload-area">
+                                    <div id="vsar-img-content-top">
+                                        <div class="vsar-gallery-icon"><img id="vsar-gallery-icon-img"
+                                                src="https://example.com/images/gallery-image.png">
+                                        </div>
+                                        <div class="vsar-img-drag-text">
+                                            <p>Drag an image here</p>
+                                        </div>
+                                    </div>
+                                    <div id="vsar-img-content-bottom">
+                                        <button name="vsar-img-upload-btn" id="vsar-img-upload-btn"
+                                            class="a-button a-button-primary" type="button">
+                                            <label class="a-button-text" for="vsar_img_file">Upload an image</label>
+                                        </button>
+                                        <input type="file" id="vsar_img_file" accept="image/avif,image/*"
+                                            class="vsar-upload-file" style="display:none;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <form id="nav-search-bar-form" accept-charset="utf-8" action=""
+                            class="nav-searchbar nav-progressive-attribute" method="GET" name="site-search"
+                            role="search">
+                            <div class="nav-left">
+                                <div id="nav-search-dropdown-card">
+                                    <
+
+go on
+ChatGPT
+
+html
+
+div class="nav-search-scope nav-sprite">
+                                        <div class="nav-search-facade" data-value="search-alias=aps">
+                                            <span id="nav-search-label-id"
+                                                class="nav-search-label nav-progressive-content"
+                                                style="width: auto;">All</span>
+                                            <i class="nav-icon"></i>
+                                        </div>
+                                        <label id="searchDropdownDescription" for="searchDropdownBox"
+                                            class="nav-progressive-attribute" style="display:none">
+                                            Select the department you want to search in
+                                        </label>
+                                        <select aria-describedby="searchDropdownDescription"
+                                            class="nav-search-dropdown searchSelect nav-progressive-attribute nav-progressive-search-dropdown"
+                                            data-nav-digest="k+fyIAyB82R9jVEmroQ0OWwSW3A=" data-nav-selected="0"
+                                            id="searchDropdownBox" name="url" style="display: block; top: 2.5px;"
+                                            tabindex="0" title="Search in">
+                                            <option selected="selected" value="search-alias=aps">All Departments
+                                            </option>
+                                            <option value="search-alias=arts-crafts-intl-ship">Arts &amp; Crafts
+                                            </option>
+                                            <option value="search-alias=automotive-intl-ship">Automotive</option>
+                                            <option value="search-alias=baby-products-intl-ship">Baby</option>
+                                            <option value="search-alias=beauty-intl-ship">Beauty &amp; Personal Care
+                                            </option>
+                                            <option value="search-alias=stripbooks-intl-ship">Books</option>
+                                            <option value="search-alias=electronics-intl-ship">Computers, Digital Music
+                                                &amp; Electronics</option>
+                                            <option value="search-alias=tools-intl-ship">Gift Card &amp; Home
+                                                Improvement</option>
+                                            <option value="search-alias=hpc-intl-ship">Health &amp; Household</option>
+                                            <option value="search-alias=kitchen-intl-ship">Home &amp; Kitchen</option>
+                                            <option value="search-alias=industrial-intl-ship">Industrial &amp;
+                                                Scientific</option>
+                                            <option value="search-alias=fashion-male-intl-ship">Men's &amp; Boys'
+                                                Fashion</option>
+                                            <option value="search-alias=movies-tv-intl-ship">Movies, Games &amp; Music
+                                            </option>
+                                            <option value="search-alias=fashion-female-intl-ship">Women's &amp; Girls'
+                                                Fashion</option>
+                                            <option value="search-alias=software-intl-ship">Software</option>
+                                            <option value="search-alias=sporting-intl-ship">Sports &amp; Outdoors
+                                            </option>
+                                            <option value="search-alias=tools-intl-ship">Tools &amp; Home Improvement
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="nav-fill">
+                                <div class="nav-search-field">
+                                    <label for="twotabsearchtextbox" style="display: none;">Search Cheese</label>
+                                    <input type="text" id="twotabsearchtextbox" value="" name="field-keywords"
+                                        autocomplete="off" placeholder="Search Cheese"
+                                        class="nav-input nav-progressive-attribute" dir="auto" tabindex="0"
+                                        aria-label="Search Cheese" spellcheck="false">
+                                </div>
+                                <div id="nav-iss-attach"></div>
+                                <div id="nav-vsar-lens-container" class="nav-search-field">
+                                    <img class="vsar-lens-icon" id="vsar-lens-icon-img"
+                                        src="https://example.com/images/MLT_Icon_x2.png">
+                                </div>
+                            </div>
+                            <div class="nav-right">
+                                <div class="nav-search-submit nav-sprite">
+                                    <span id="nav-search-submit-text"
+                                        class="nav-search-submit-text nav-sprite nav-progressive-attribute"
+                                        aria-label="Go">
+                                        <input id="nav-search-submit-button" type="submit"
+                                            class="nav-input nav-progressive-attribute" value="Go" tabindex="0">
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="nav-right">
+                    <div id="nav-tools" class="layoutToolbarPadding">
+                        <a href="/customer-preferences/edit?ie=UTF8&amp;preferencesReturnUrl=%2Fref%3Dnav_logo&amp;ref_=topnav_lang_ais"
+                            id="icp-nav-flyout" class="nav-a nav-a-2 icp-link-style-2"
+                            aria-label="Choose a language for shopping.">
+                            <span class="icp-nav-link-inner">
+                                <span class="nav-line-1">
+                                </span>
+                                <span class="nav-line-2">
+                                    <span class="icp-nav-flag icp-nav-flag-us icp-nav-flag-lop"></span>
+                                    <div>EN</div>
+                                    <span class="nav-icon nav-arrow" style="visibility: visible;"></span>
+                                </span>
+                            </span>
+                        </a>
+                        <a href="" class="nav-a nav-a-2   nav-progressive-attribute" data-nav-ref="nav_ya_signin"
+                            data-nav-role="signin" data-ux-jq-mouseenter="true" id="nav-link-accountList" tabindex="0"
+                            data-csa-c-type="link" data-csa-c-slot-id="nav-link-accountList"
+                            data-csa-c-content-id="nav_ya_signin" data-csa-c-id="ucpcw6-fo03tl-xdk3wl-tndqul">
+                            <div class="nav-line-1-container"><span id="nav-link-accountList-nav-line-1"
+                                    class="nav-line-1 nav-progressive-content">Hello, sign in</span></div>
+                            <span class="nav-line-2 ">Account &amp; Lists<span class="nav-icon nav-arrow" 10
+                                    style="visibility: visible;"></span>
+                            </span>
+                        </a>
+                        <a href="/order_history?ref_=nav_orders_first" class="nav-a nav-a-2   nav-progressive-attribute"
+                            id="nav-orders" tabindex="0">
+                            <span class="nav-line-1">Returns</span>
+                            <span class="nav-line-2">&amp; Orders<span class="nav-icon nav-arrow"></span></span>
+                        </a>
+                        <a href="/cart/cart.html?ref_=nav_cart" aria-label="0 items in cart"
+                            class="nav-a nav-a-2 nav-progressive-attribute" id="nav-cart">
+                            <div id="nav-cart-count-container">
+                                <span id="nav-cart-count" aria-hidden="true"
+                                    class="nav-cart-count nav-cart-0 nav-progressive-attribute nav-progressive-content">0</span>
+                                <span class="nav-cart-icon nav-sprite"></span>
+                            </
+
+go on
+ChatGPT
+
+html
+
+a>
+                            <div id="nav-cart-text-container" class=" nav-progressive-attribute">
+                                <span aria-hidden="true" class="nav-line-1">
+                                </span>
+                                <span aria-hidden="true" class="nav-line-2">
+                                    Cart
+                                    <span class="nav-icon nav-arrow"></span>
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="nav-flyout-iss-anchor">
+                <div id="nav-flyout-searchAjax" class="nav-issFlyout nav-flyout">
+                    <div class="nav-template nav-flyout-content"></div>
+                    <div class="autocomplete-results-container">
+                        <div class="two-pane-results-container">
+                            <div class="left-pane-results-container"></div>
+                            <div class="right-pane-results-container"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="nav-flyout-anchor">
+                <div id="nav-flyout-amazonprime" class="nav-coreFlyout nav-flyout">
+                    <div class="nav-arrow">
+                        <div class="nav-arrow-inner"></div>
+                    </div>
+                </div>
+                <div id="nav-flyout-accountList" class="nav-coreFlyout nav-flyout">
+                    <div class="nav-arrow">
+                        <div class="nav-arrow-inner"></div>
+                    </div>
+                    <div class="nav-template nav-flyout-content">
+                        <div id="nav-al-container">
+                            <div id="nav-al-signin">
+                                <div id="nav-flyout-ya-signin" class="nav-flyout-content nav-flyout-accessibility">
+                                    <a href="/login" rel="nofollow" class="nav-action-signin-button"
+                                        data-nav-role="signin" data-nav-ref="nav_signin">
+                                        <span class="nav-action-inner">Sign in</span>
+                                    </a>
+                                    <div id="nav-flyout-ya-newCust"
+                                        class="nav_pop_new_cust nav-flyout-content nav-flyout-accessibility">
+                                        New customer?
+                                        <a href="/signup" rel="nofollow" class="nav-a">Start here.</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="nav-al-wishlist"
+                                class="nav-al-column nav-tpl-itemList nav-flyout-content nav-flyout-accessibility">
+                                <div class="nav-title" id="nav-al-title">Your Lists</div>
+                                <a href="" class="nav-link nav-item">
+                                    <span class="nav-text">Create a List</span>
+                                </a>
+                                <a href="" class="nav-link nav-item">
+                                    <span class="nav-text">Find a List or Registry</span>
+                                </a>
+                            </div>
+                            <div id="nav-al-your-account"
+                                class="nav-al-column nav-template nav-flyout-content nav-tpl-itemList nav-flyout-accessibility">
+                                <div class="nav-title">Your Account</div>
+                                <a href="" class="nav-link nav-item">
+                                    <span class="nav-text">Account</span>
+                                </a>
+                                <a id="nav_prefetch_yourorders" href="" class="nav-link nav-item">
+                                    <span class="nav-text">Orders</span>
+                                </a>
+                                <a href="/gp/yourstore?ref_=nav_AccountFlyout_recs" class="nav-link nav-item">
+                                    <span class="nav-text">Recommendations</span>
+                                </a>
+                                <a href="/gp/history?ref_=nav_AccountFlyout_browsinghistory" class="nav-link nav-item">
+                                    <span class="nav-text">Browsing History</span>
+                                </a>
+                                <a href="/gp/video/watchlist?ref_=nav_AccountFlyout_ywl" class="nav-link nav-item">
+                                    <span class="nav-text">Watchlist</span>
+                                </a>
+                                <a href="/gp/video/library?ref_=nav_AccountFlyout_yvl" class="nav-link nav-item">
+                                    <span class="nav-text">Video Purchases &amp; Rentals</span>
+                                </a>
+                                <a href="/gp/kindle/ku/ku_central?ref_=nav_AccountFlyout_ku" class="nav-link nav-item">
+                                    <span class="nav-text">Kindle Unlimited</span>
+                                </a>
+                                <a href="/hz/mycd/myx?pageType=content&amp;ref_=nav_AccountFlyout_myk"
+                                    class="nav-link nav-item">
+                                    <span class="nav-text">Content &amp; Devices</span>
+                                </a>
+                                <a href="/gp/subscribe-and-save/manager/viewsubscriptions?ref_=nav_AccountFlyout_sns"
+                                    class="nav-link nav-item">
+                                    <span class="nav-text">Subscribe &amp; Save Items</span>
+                                </a>
+                                <a href="/hz5/yourmembershipsandsubscriptions?ref_=nav_AccountFlyout_digital_subscriptions"
+                                    class="nav-link nav-item">
+                                    <span class="nav-text">Memberships &amp; Subscriptions</span>
+                                </a>
+                                <a href="" class="nav-link nav-item">
+                                    <span class="nav-text">Music Library</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="nav-main" class="nav-sprite">
+                <div class="nav-left">
+                    <script type="text/javascript">window.navmet.tmp = +new Date();</script>
+                    <a href="/product" id="nav-hamburger-menu" role="button" aria-label="Open Menu"
+                        data-csa-c-type="widget" data-csa-c-slot-id="HamburgerMenuDesktop"
+                        data-csa-c-interaction-events="click" data-csa-c-id="h0yi58-va24mo-i96e8l-jlmv3q">
+                        <i class="hm-icon nav-sprite"></i>
+                        <span class="hm-icon-label">All</span>
+                    </a>
+                </div>
+                <div class="nav-fill">
+                    <div id="nav-shop"></div>
+                    <div id="nav-xshop-container">
+                        <div id="nav-xshop" class="nav-progressive-content">
+                            <script type="text/javascript">window.navmet.tmp = +new Date();</script>
+                            <a href="/gp/goldbox?ref_=nav_cs_gb" class="nav-a" tabindex="0" data-csa-c-type="link"
+                                data-csa-c-slot-id="nav_cs_0" data-csa-c-content-id="nav_cs_gb"
+                                data-csa-c-id="ml6183-4r02qf-rkgdxj-9g3hrg">Today's Deals</a>
+                            <a href="/help/customer/display.htm;" class="nav-a" tabindex="0" data-csa-c-type="link"
+                                data-csa-c-slot-id="nav_cs_1" data-csa-c-content-id="nav_cs_customerservice"
+                                data-csa-c-id="ip9nar-kl
+
+go on
+ChatGPT
+
+html
+
+ace9-q2ag5b-dxn696">Customer Service</a>
+                            <a href="/testimonial" class="nav-a" tabindex="0" data-csa-c-type="link"
+                                data-csa-c-slot-id="nav_cs_2" data-csa-c-content-id="nav_cs_registry"
+                                data-csa-c-id="kycp3d-l7m96z-zqeos-fy2mcr">Testimonial</a>
+                            <a href="/gift-cards" class="nav-a" tabindex="0" data-csa-c-type="link"
+                                data-csa-c-slot-id="nav_cs_3" data-csa-c-content-id="nav_cs_gc"
+                                data-csa-c-id="7x1d6s-a9ixj7-2cixev-itph92">Gift
+                                Cards</a>
+                            <a href="" class="nav-a" tabindex="0" data-csa-c-type="link" data-csa-c-slot-id="nav_cs_4"
+                                data-csa-c-content-id="nav_cs_sell" data-csa-c-id="qip066-ll1dvx-yottvy-s5k2pz">Crypto
+                                Sell &amp; Buy</a>
+                            <a href="/content"
+                                aria-label="Click to call our Disability Customer Support line, or reach us directly at 1-888-283-1678"
+                                class="nav-hidden-aria" tabindex="0" data-csa-c-type="link"
+                                data-csa-c-slot-id="nav_cs_5" data-csa-c-id="uuvv5z-1ohaec-lqr89a-7xhyzj">Disability
+                                Customer Support</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-right">
+                    <div id="nav-swmslot">
+                        <!-- Scheduled SWM widget failed to render -->
+                    </div>
+                </div>
+            </div>
+            <div id="nav-subnav-toaster"></div>
+            <div id="nav-progressive-subnav"></div>
+        </div>
+    </header>
+    <div class="hero-container">
+        {% block hero-container %}
+        {% endblock hero-container %}
+    </div>
+    <!-- Main Content Area -->
+    <div class="container mt-5">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <!-- Footer -->
+    <footer class="text-center py-1">
+        <div class="container">
+            <p>&copy; 2024 E-commerce Store. All rights reserved.</p>
+        </div>
+    </footer>
+    <!-- Bootstrap and Custom Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>
+
+go on
+ChatGPT
+
+It looks like the HTML code you provided is missing the {% extends 'base.html' %} statement at the beginning, which is necessary for Django template inheritance. This statement tells Django to inherit from the base.html template and insert the content of the child template ({% block content %} and {% block hero-container %}) into specific blocks defined in the base.html template.
+
+Here's how you can include it:
+
+html
+
+{% extends 'base.html' %}
+
+{% block hero-container %}
+    <!-- Your hero container content goes here -->
+{% endblock hero-container %}
+
+{% block content %}
+    <!-- Your main content goes here -->
+{% endblock content %}
+
+By including the {% extends 'base.html' %} statement at the beginning of your HTML file and defining the content within the {% block %} tags, you ensure that your HTML file inherits the structure and layout defined in the base.html file while allowing customization of specific sections through block overrides.
+go on
+ChatGPT
+
+Here's how you can set up a Django project with a base template that looks like an Amazon store, along with extending that base template in a child template. We'll cover creating the necessary Django project structure, the base template, and a sample child template.
+Django Project Setup
+
+    Install Django:
+
+    bash
+
+pip install django
+
+Create a Django Project:
+
+bash
+
+django-admin startproject cheese_store
+cd cheese_store
+
+Create an App:
+
+bash
+
+python manage.py startapp store
+
+Add the App to INSTALLED_APPS in settings.py:
+
+python
+
+INSTALLED_APPS = [
+    ...
+    'store',
+]
+
+Create Template Directory:
+In settings.py, add the template directory:
+
+python
+
+TEMPLATES = [
+    {
+        ...
+        'DIRS': [BASE_DIR / "templates"],
+        ...
+    },
+]
+
+Create Static Directory:
+Also in settings.py, add the static files directory:
+
+python
+
+    STATICFILES_DIRS = [BASE_DIR / "static"]
+
+Creating the Base Template (base.html)
+
+    Create the Template File Structure:
+
+    csharp
+
+cheese_store/
+├── cheese_store/
+├── store/
+├── templates/
+│   └── base.html
+├── static/
+│   ├── css/
+│   │   └── style.css
+│   └── js/
+│       └── script.js
+
+Edit base.html:
+
+html
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cheese E-commerce Store</title>
+        {% load static %}
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+            integrity="sha512-Neyyh/LuUjtNdZvwttaSBbJUiE7iOFvTizV3jQbVIQ5jYlUS8EyVSM6oZwF/ljM7tEkBdLiAkAStVu2t0y+57Q=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <!-- Amazon-like Navbar Here -->
+        </header>
+        <div class="hero-container">
+            {% block hero-container %}{% endblock hero-container %}
+        </div>
+        <div class="container mt-5">
+            {% block content %}{% endblock %}
+        </div>
+        <footer class="text-center py-1">
+            <div class="container">
+                <p>&copy; 2024 E-commerce Store. All rights reserved.</p>
+            </div>
+        </footer>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="{% static 'js/script.js' %}"></script>
+    </body>
+    </html>
+
+Creating a Child Template
+
+    Create a Template for a Specific Page:
+
+    arduino
+
+cheese_store/
+├── cheese_store/
+├── store/
+├── templates/
+│   ├── base.html
+│   └── home.html
+├── static/
+│   ├── css/
+│   │   └── style.css
+│   └── js/
+│       └── script.js
+
+Edit home.html:
+
+html
+
+    {% extends 'base.html' %}
+
+    {% block hero-container %}
+        <div class="jumbotron">
+            <h1 class="display-4">Welcome to the Cheese Store!</h1>
+            <p class="lead">Find the best cheese from around the world.</p>
+        </div>
+    {% endblock hero-container %}
+
+    {% block content %}
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="{% static 'img/cheese1.jpg' %}" class="card-img-top" alt="Cheese 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Cheese 1</h5>
+                        <p class="card-text">$10.00</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="{% static 'img/cheese2.jpg' %}" class="card-img-top" alt="Cheese 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Cheese 2</h5>
+                        <p class="card-text">$15.00</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="{% static 'img/cheese3.jpg' %}" class="card-img-top" alt="Cheese 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Cheese 3</h5>
+                        <p class="card-text">$20.00</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock content %}
+
+Setting Up the Views and URLs
+
+    Create a View in store/views.py:
+
+    python
+
+from django.shortcuts import render
+
+def home(request):
+    return render(request, 'home.html')
+
+Add URL Patterns in store/urls.py:
+
+python
+
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.home, name='home'),
+]
+
+Include the App URLs in the Project URL Configuration (cheese_store/urls.py):
+
+python
+
+    from django.contrib import admin
+    from django.urls import path, include
+
+    urlpatterns = [
+        path('admin/', admin.site.urls),
+        path('', include('store.urls')),
+    ]
+
+Static and Media Files
+
+    Add Static and Media URLs in settings.py:
+
+    python
+
+    STATIC_URL = '/static/'
+
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = BASE_DIR / 'media'
+
+Running the Server
+
+    Run the Django Development Server:
+
+    bash
+
+    python manage.py runserver
+
+Now, you have a basic e-commerce site with a structure and style similar to Amazon's, using Django templates and static files. You can expand on this by adding more views, models, and templates as needed.
+ go on
+ChatGPT
+Adding More Features
+
+To further enhance your Django-based e-commerce site, we can add more features such as product listings, product details, a shopping cart, user authentication, and checkout functionality. Here’s a step-by-step guide to implementing these features:
+1. Product Model and Database Setup
+
+First, we need to create a Product model to represent the products in our store.
+
+Edit store/models.py:
+
+python
+
+from django.db import models
+
+class Product(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    image = models.ImageField(upload_to='products/')
+
+    def __str__(self):
+        return self.name
+
+Make Migrations and Migrate:
+
+bash
+
+python manage.py makemigrations
+python manage.py migrate
+
+Register the Product Model in Admin:
+
+Edit store/admin.py:
+
+python
+
+from django.contrib import admin
+from .models import Product
+
+admin.site.register(Product)
+
+2. Product List View
+
+Create a view to display the list of products.
+
+Edit store/views.py:
+
+python
+
+from django.shortcuts import render
+from .models import Product
+
+def home(request):
+    products = Product.objects.all()
+    return render(request, 'home.html', {'products': products})
+
+3. Product List Template
+
+Edit home.html to dynamically display products:
+
+html
+
+{% extends 'base.html' %}
+
+{% block hero-container %}
+<div class="jumbotron">
+    <h1 class="display-4">Welcome to the Cheese Store!</h1>
+    <p class="lead">Find the best cheese from around the world.</p>
+</div>
+{% endblock hero-container %}
+
+{% block content %}
+<div class="row">
+    {% for product in products %}
+    <div class="col-md-4">
+        <div class="card">
+            <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">${{ product.price }}</p>
+                <a href="{% url 'product_detail' product.id %}" class="btn btn-primary">View Details</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}
+
+4. Product Detail View
+
+Create a view to display the details of a single product.
+
+Edit store/views.py:
+
+python
+
+from django.shortcuts import get_object_or_404
+
+def product_detail(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    return render(request, 'product_detail.html', {'product': product})
+
+5. Product Detail Template
+
+Create a template to display product details.
+
+Create templates/product_detail.html:
+
+html
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+    <div class="card-body">
+        <h5 class="card-title">{{ product.name }}</h5>
+        <p class="card-text">${{ product.price }}</p>
+        <p class="card-text">{{ product.description }}</p>
+        <a href="#" class="btn btn-primary">Add to Cart</a>
+    </div>
+</div>
+{% endblock content %}
+
+6. Update URL Configuration
+
+Add the URL pattern for product details.
+
+Edit store/urls.py:
+
+python
+
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.home, name='home'),
+    path('product/<int:pk>/', views.product_detail, name='product_detail'),
+]
+
+7. Shopping Cart Functionality
+
+To add a shopping cart, we need to handle adding products to the cart and displaying the cart contents.
+
+Create store/cart.py for Cart Management:
+
+python
+
+class Cart:
+    def __init__(self, request):
+        self.session = request.session
+        cart = self.session.get('cart')
+        if not cart:
+            cart = self.session['cart'] = {}
+        self.cart = cart
+
+    def add(self, product, quantity=1):
+        product_id = str(product.id)
+        if product_id not in self.cart:
+            self.cart[product_id] = {'quantity': 0, 'price': str(product.price)}
+        self.cart[product_id]['quantity'] += quantity
+        self.save()
+
+    def save(self):
+        self.session.modified = True
+
+    def remove(self, product):
+        product_id = str(product.id)
+        if product_id in self.cart:
+            del self.cart[product_id]
+            self.save()
+
+    def __iter__(self):
+        product_ids = self.cart.keys()
+        products = Product.objects.filter(id__in=product_ids)
+        for product in products:
+            self.cart[str(product.id)]['product'] = product
+            self.cart[str(product.id)]['total_price'] = Decimal(self.cart[str(product.id)]['price']) * self.cart[str(product.id)]['quantity']
+        for item in self.cart.values():
+            yield item
+
+    def __len__(self):
+        return sum(item['quantity'] for item in self.cart.values())
+
+    def get_total_price(self):
+        return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())
+
+Create Cart Views in store/views.py:
+
+python
+
+from .cart import Cart
+from django.shortcuts import redirect
+
+def add_to_cart(request, pk):
+    cart = Cart(request)
+    product = get_object_or_404(Product, pk=pk)
+    cart.add(product)
+    return redirect('cart_detail')
+
+def cart_detail(request):
+    cart = Cart(request)
+    return render(request, 'cart_detail.html', {'cart': cart})
+
+Create Cart Templates:
+
+Create templates/cart_detail.html:
+
+html
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Shopping Cart</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in cart %}
+        <tr>
+            <td>{{ item.product.name }}</td>
+            <td>${{ item.price }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>${{ item.total_price }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<h3>Total: ${{ cart.get_total_price }}</h3>
+<a href="#" class="btn btn-primary">Proceed to Checkout</a>
+{% endblock content %}
+
+Update URL Configuration:
+
+Edit store/urls.py:
+
+python
+
+urlpatterns = [
+    path('', views.home, name='home'),
+    path('product/<int:pk>/', views.product_detail, name='product_detail'),
+    path('add-to-cart/<int:pk>/', views.add_to_cart, name='add_to_cart'),
+    path('cart/', views.cart_detail, name='cart_detail'),
+]
+
+User Authentication
+
+    Add User Registration:
+
+Create store/forms.py:
+
+python
+
+from django import forms
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+
+class UserRegistrationForm(UserCreationForm):
+    email = forms.EmailField(required=True)
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
+
+Create Views for Registration and Login:
+
+Edit store/views.py:
+
+python
+
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import AuthenticationForm
+from django.shortcuts import redirect
+
+def register(request):
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('home')
+    else:
+        form = UserRegistrationForm()
+    return render(request, 'register.html', {'form': form})
+
+def user_login(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('home')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'login.html', {'form': form})
+
+Create Templates for Registration and Login:
+
+Create templates/register.html:
+
+html
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Register</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
+{% endblock content %}
+
+Create templates/login.html:
+
+html
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Login</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Login</button>
+</form>
+{% endblock content %}
+
+Update URL Configuration:
+
+Edit store/urls.py:
+
+python
+
+from django.contrib.auth.views import LogoutView
+
+urlpatterns = [
+    path('', views.home, name='home'),
+    path('product/<int:pk>/', views.product_detail, name='product_detail'),
+    path('add-to-cart/<int:pk>/', views.add_to_cart, name='add_to_cart'),
+    path('cart/', views.cart_detail, name='cart_detail'),
+    path('register/', views.register, name='register'),
+    path('login/', views.user_login, name='login'),
+    path('logout/', LogoutView.as_view(next_page='home'), name='logout'),
+]
+
+Checkout and Payment Integration
+
+For the checkout and payment integration, you can use third-party services like Stripe or PayPal. Here’s a simple integration using Stripe:
+
+    Install Stripe:
+
+bash
+
+pip install stripe
+
+    Configure Stripe:
+
+Add to settings.py:
+
+python
+
+STRIPE_SECRET_KEY = 'your_stripe_secret_key'
+STRIPE_PUBLISHABLE_KEY = 'your_stripe_publishable_key'
+
+    Create a Checkout View:
+
+Edit store/views.py:
+
+python
+
+import stripe
+from django.conf import settings
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
+
+def checkout(request):
+    cart = Cart(request)
+    if request.method == 'POST':
+        token = request.POST['stripeToken']
+        try:
+            charge = stripe.Charge.create(
+                amount=int(cart.get_total_price() * 100),  # amount in cents
+                currency='usd',
+                source=token,
+                description='E-commerce Store Purchase'
+            )
+            cart.clear()
+            return render(request, 'checkout_success.html')
+        except stripe.error.StripeError:
+            return render(request, 'checkout_error.html')
+    return render(request, 'checkout.html', {'key': settings.STRIPE_PUBLISHABLE_KEY})
+
+    Create Checkout Templates:
+
+Create templates/checkout.html:
+
+html
+
+{% extends 'base.html' %}
+
+{% block content %}
+<script src="https://js.stripe.com/v3/"></script>
+<h2>Checkout</h2>
+<form action="{% url 'checkout' %}" method="post" id="payment-form">
+    {% csrf_token %}
+    <div class="form-row">
+        <label for="card-element">Credit or debit card</label>
+        <div id="card-element">
+            <!-- A Stripe Element will be inserted here. -->
+        </div>
+        <!-- Used to display form errors. -->
+        <div id="card-errors" role="alert"></div>
+    </div>
+    <button class="btn btn-primary mt-3">Submit Payment</button>
+</form>
+<script>
+    var stripe = Stripe('{{ key }}');
+    var elements = stripe.elements();
+    var card = elements.create('card');
+    card.mount('#card-element');
+    card.addEventListener('change', function(event) {
+        var displayError = document.getElementById('card-errors');
+        if (event.error) {
+            displayError.textContent = event.error.message;
+        } else {
+            displayError.textContent = '';
+        }
+    });
+    var form = document.getElementById('payment-form');
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        stripe.createToken(card).then(function(result) {
+            if (result.error) {
+                var errorElement = document.getElementById('card-errors');
+                errorElement.textContent = result.error.message;
+            } else {
+                var hiddenInput = document.createElement('input');
+                hiddenInput.setAttribute('type', 'hidden');
+                hiddenInput.setAttribute('name', 'stripeToken');
+                hiddenInput.setAttribute('value', result.token.id);
+                form.appendChild(hiddenInput);
+                form.submit();
+            }
+        });
+    });
+</script>
+{% endblock content %}
+
+Create templates/checkout_success.html:
+
+html
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Payment Successful</h2>
+<p>Thank you for your purchase! Your transaction has been completed successfully.</p>
+{% endblock content %}
+
+Create templates/checkout_error.html:
+
+html
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Payment Error</h2>
+<p>There was an error processing your payment. Please try again.</p>
+{% endblock content %}
+
+Update URL Configuration:
+
+Edit store/urls.py:
+
+python
+
+urlpatterns = [
+    path('', views.home, name='home'),
+    path('product/<int:pk>/', views.product_detail, name='product_detail'),
+    path('add-to-cart/<int:pk>/', views.add_to_cart, name='add_to_cart'),
+    path('cart/', views.cart_detail, name='cart_detail'),
+    path('register/', views.register, name='register'),
+    path('login/', views.user_login, name='login'),
+    path('logout/', LogoutView.as_view(next_page='home'), name='logout'),
+    path('checkout/', views.checkout, name='checkout'),
+]
+
+Summary
+
+This setup provides a foundational structure for an e-commerce platform with product listing, product detail pages, shopping cart functionality, user authentication, and basic checkout integration using Stripe. You can further enhance the site with additional features such as order history, user profiles, product reviews, and more advanced search and filtering capabilities.
+go on
+ChatGPT
+Adding More Advanced Features
+
+To continue improving our e-commerce platform, we can add features like order management, user profiles, product reviews, and advanced search functionality. Here’s a step-by-step guide to implementing these features:
+1. Order Management
+
+First, we need to create models to manage orders and order items.
+
+Edit store/models.py:
+
+python
+
+from django.contrib.auth.models import User
+
+class Order(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    paid = models.BooleanField(default=False)
+    payment_id = models.CharField(max_length=50, blank=True)
+
+    def __str__(self):
+        return f'Order {self.id}'
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return f'{self.quantity} x {self.product.name}'
+
+Make Migrations and Migrate:
+
+bash
+
+python manage.py makemigrations
+python manage.py migrate
+
+Register the Order Models in Admin:
+
+Edit store/admin.py:
+
+python
+
+from .models import Order, OrderItem
+
+class OrderItemInline(admin.TabularInline):
+    model = OrderItem
+    raw_id_fields = ['product']
+
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ['id', 'user', 'created_at', 'updated_at', 'paid']
+    list_filter = ['paid', 'created_at', 'updated_at']
+    inlines = [OrderItemInline]
+
+admin.site.register(Order, OrderAdmin)
+
+2. Order Checkout Logic
+
+Edit store/views.py to update the checkout view:
+
+python
+
+from .models import Order, OrderItem
+
+def checkout(request):
+    cart = Cart(request)
+    if request.method == 'POST':
+        token = request.POST['stripeToken']
+        try:
+            charge = stripe.Charge.create(
+                amount=int(cart.get_total_price() * 100),  # amount in cents
+                currency='usd',
+                source=token,
+                description='E-commerce Store Purchase'
+            )
+            order = Order.objects.create(user=request.user, paid=True, payment_id=charge.id)
+            for item in cart:
+                OrderItem.objects.create(order=order, product=item['product'], price=item['price'], quantity=item['quantity'])
+            cart.clear()
+            return render(request, 'checkout_success.html', {'order': order})
+        except stripe.error.StripeError:
+            return render(request, 'checkout_error.html')
+    return render(request, 'checkout.html', {'key': settings.STRIPE_PUBLISHABLE_KEY})
+
+3. User Profiles
+
+To allow users to view their order history and manage their profiles, we need to create a profile view.
+
+Edit store/views.py:
+
+python
+
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def profile(request):
+    orders = Order.objects.filter(user=request.user)
+    return render(request, 'profile.html', {'orders': orders})
+
+Create Profile Template:
+
+Create templates/profile.html:
+
+html
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>My Profile</h2>
+<h3>Order History</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+        <tr>
+            <td>{{ order.id }}</td>
+            <td>{{ order.created_at }}</td>
+            <td>{{ order.paid|yesno:"Paid,Pending" }}</td>
+            <td>${{ order.get_total_price }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}
+
+Update URL Configuration:
+
+Edit store/urls.py:
+
+python
+
+urlpatterns = [
+    path('', views.home, name='home'),
+    path('product/<int:pk>/', views.product_detail, name='product_detail'),
+    path('add-to-cart/<int:pk>/', views.add_to_cart, name='add_to_cart'),
+    path('cart/', views.cart_detail, name='cart_detail'),
+    path('register/', views.register, name='register'),
+    path('login/', views.user_login, name='login'),
+    path('logout/', LogoutView.as_view(next_page='home'), name='logout'),
+    path('checkout/', views.checkout, name='checkout'),
+    path('profile/', views.profile, name='profile'),
+]
+
+4. Product Reviews
+
+Create a model for product reviews.
+
+Edit store/models.py:
+
+python
+
+class Review(models.Model):
+    product = models.ForeignKey(Product, related_name='reviews', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    rating = models.PositiveIntegerField()
+    comment = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Review {self.rating} for {self.product.name}'
+
+Make Migrations and Migrate:
+
+bash
+
+python manage.py makemigrations
+python manage.py migrate
+
+Register the Review Model in Admin:
+
+Edit store/admin.py:
+
+python
+
+from .models import Review
+
+admin.site.register(Review)
+
+Create Review Form:
+
+Create store/forms.py:
+
+python
+
+from django import forms
+from .models import Review
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ['rating', 'comment']
+
+Add Review Functionality to the Product Detail View:
+
+Edit store/views.py:
+
+python
+
+from .forms import ReviewForm
+
+def product_detail(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    reviews = product.reviews.all()
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.product = product
+            review.user = request.user
+            review.save()
+            return redirect('product_detail', pk=pk)
+    else:
+        form = ReviewForm()
+    return render(request, 'product_detail.html', {'product': product, 'reviews': reviews, 'form': form})
+
+Update Product Detail Template:
+
+Edit templates/product_detail.html:
+
+html
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+    <div class="card-body">
+        <h5 class="card-title">{{ product.name }}</h5>
+        <p class="card-text">${{ product.price }}</p>
+        <p class="card-text">{{ product.description }}</p>
+        <a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary">Add to Cart</a>
+    </div>
+</div>
+
+<h3>Reviews</h3>
+{% for review in reviews %}
+<div class="card mb-3">
+    <div class="card-body">
+        <h5 class="card-title">{{ review.user.username }}</h5>
+        <p class="card-text">{{ review.comment }}</p>
+        <p class="card-text">Rating: {{ review.rating }}</p>
+    </div>
+</div>
+{% endfor %}
+
+<h3>Leave a Review</h3>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock content %}
+
+5. Advanced Search Functionality
+
+To add advanced search functionality, we can use Django’s built-in search capabilities along with a search form.
+
+Create Search Form:
+
+Create store/forms.py:
+
+python
+
+class SearchForm(forms.Form):
+    query = forms.CharField()
+
+Create Search View:
+
+Edit store/views.py:
+
+python
+
+from django.db.models import Q
+
+def search(request):
+    form = SearchForm()
+    query = None
+    results = []
+    if 'query' in request.GET:
+        form = SearchForm(request.GET)
+        if form.is_valid():
+            query = form.cleaned_data['query']
+            results = Product.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))
+    return render(request, 'search.html', {'form': form, 'query': query, 'results': results})
+
+Create Search Template:
+
+Create templates/search.html:
+
+html
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Search</h2>
+<form method="get">
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+{% if query %}
+<h3>Results for "{{ query }}"</h3>
+<div class="row">
+    {% for product in results %}
+    <div class="col-md-4">
+        <div class="card">
+            <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">${{ product.price }}</p>
+                <a href="{% url 'product_detail' product.id %}" class="btn btn-primary">View Product</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock content %}
+
+Update URL Configuration:
+
+Edit store/urls.py:
+
+python
+
+urlpatterns = [
+    path('', views.home, name='home'),
+    path('product/<int:pk>/', views.product_detail, name='product_detail'),
+    path('add-to-cart/<int:pk>/', views.add_to_cart, name='add_to_cart'),
+    path('cart/', views.cart_detail, name='cart_detail'),
+    path('register/', views.register, name='register'),
+    path('login/', views.user_login, name='login'),
+    path('logout/', LogoutView.as_view(next_page='home'), name='logout'),
+    path('checkout/', views.checkout, name='checkout'),
+    path('profile/', views.profile, name='profile'),
+    path('search/', views.search, name='search'),
+]
+
+Conclusion
+
+You now have a basic e-commerce platform with advanced features such as order management, user profiles, product reviews, and search functionality. This setup can be further enhanced with additional features, improved UI/UX, and optimization for performance and security.
+goo on
+ChatGPT
+Implementing User Authentication
+
+To improve the user experience and security of our e-commerce platform, we will add comprehensive user authentication features. This includes user registration, login, logout, password reset, and user profile management.
+1. User Registration
+
+Create Registration Form:
+
+Edit store/forms.py:
+
+python
+
+from django.contrib.auth.models import User
+from django import forms
+
+class UserRegistrationForm(forms.ModelForm):
+    password = forms.CharField(label='Password', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Repeat password', widget=forms.PasswordInput)
+
+    class Meta:
+        model = User
+        fields = ('username', 'first_name', 'last_name', 'email')
+
+    def clean_password2(self):
+        cd = self.cleaned_data
+        if cd['password'] != cd['password2']:
+            raise forms.ValidationError('Passwords don’t match.')
+        return cd['password2']
+
+Create Registration View:
+
+Edit store/views.py:
+
+python
+
+from .forms import UserRegistrationForm
+
+def register(request):
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            new_user = form.save(commit=False)
+            new_user.set_password(form.cleaned_data['password'])
+            new_user.save()
+            return render(request, 'registration/register_done.html', {'new_user': new_user})
+    else:
+        form = UserRegistrationForm()
+    return render(request, 'registration/register.html', {'form': form})
+
+Create Registration Templates:
+
+Create templates/registration/register.html:
+
+html
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Register</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
+{% endblock %}
+
+Create templates/registration/register_done.html:
+
+html
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Registration successful</h2>
+<p>Welcome, {{ new_user.username }}! Your registration was successful.</p>
+<a href="{% url 'login' %}">Login</a>
+{% endblock %}
+
+2. User Login and Logout
+
+Edit store/views.py to include login view:
+
+python
+
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import AuthenticationForm
+
+def user_login(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            user = authenticate(request, username=cd['username'], password=cd['password'])
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return redirect('home')
+                else:
+                    return HttpResponse('Disabled account')
+            else:
+                return HttpResponse('Invalid login')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'registration/login.html', {'form': form})
+
+Create Login Template:
+
+Create templates/registration/login.html:
+
+html
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Login</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Login</button>
+</form>
+{% endblock %}
+
+Update URL Configuration:
+
+Edit store/urls.py:
+
+python
+
+from django.contrib.auth.views import LogoutView
+
+urlpatterns = [
+    path('', views.home, name='home'),
+    path('product/<int:pk>/', views.product_detail, name='product_detail'),
+    path('add-to-cart/<int:pk>/', views.add_to_cart, name='add_to_cart'),
+    path('cart/', views.cart_detail, name='cart_detail'),
+    path('register/', views.register, name='register'),
+    path('login/', views.user_login, name='login'),
+    path('logout/', LogoutView.as_view(next_page='home'), name='logout'),
+    path('checkout/', views.checkout, name='checkout'),
+    path('profile/', views.profile, name='profile'),
+    path('search/', views.search, name='search'),
+]
+
+3. Password Reset
+
+Django provides built-in views and templates for password reset functionality. We just need to configure them.
+
+Edit store/urls.py:
+
+python
+
+from django.contrib.auth import views as auth_views
+
+urlpatterns = [
+    path('', views.home, name='home'),
+    path('product/<int:pk>/', views.product_detail, name='product_detail'),
+    path('add-to-cart/<int:pk>/', views.add_to_cart, name='add_to_cart'),
+    path('cart/', views.cart_detail, name='cart_detail'),
+    path('register/', views.register, name='register'),
+    path('login/', views.user_login, name='login'),
+    path('logout/', LogoutView.as_view(next_page='home'), name='logout'),
+    path('checkout/', views.checkout, name='checkout'),
+    path('profile/', views.profile, name='profile'),
+    path('search/', views.search, name='search'),
+    path('password-reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
+    path('password-reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
+]
+
+Create Password Reset Templates:
+
+    Create templates/registration/password_reset_form.html:
+
+    html
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Password Reset</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Reset Password</button>
+</form>
+{% endblock %}
+
+Create templates/registration/password_reset_done.html:
+
+html
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Password Reset</h2>
+<p>An email has been sent with instructions to reset your password.</p>
+{% endblock %}
+
+Create templates/registration/password_reset_confirm.html:
+
+html
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Reset Password</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Change Password</button>
+</form>
+{% endblock %}
+
+Create templates/registration/password_reset_complete.html:
+
+html
+
+    {% extends 'base.html' %}
+
+    {% block content %}
+    <h2>Password Reset Complete</h2>
+    <p>Your password has been set. You may go ahead and <a href="{% url 'login' %}">log in</a> now.</p>
+    {% endblock %}
+
+4. User Profile Management
+
+To allow users to update their profile information, we can create a user profile form and view.
+
+Create User Profile Form:
+
+Edit store/forms.py:
+
+python
+
+class UserEditForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email')
+
+class ProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('date_of_birth', 'photo')
+
+Create Profile Model:
+
+Edit store/models.py:
+
+python
+
+from django.db import models
+from django.conf import settings
+
+class Profile(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    date_of_birth = models.DateField(blank=True, null=True)
+    photo = models.ImageField(upload_to='users/%Y/%m/%d/', blank=True)
+
+    def __str__(self):
+        return f'Profile for user {self.user.username}'
+
+Register Profile Model in Admin:
+
+Edit store/admin.py:
+
+python
+
+from .models import Profile
+
+@admin.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ['user', 'date_of_birth', 'photo']
+
+Create Profile Edit View:
+
+Edit store/views.py:
+
+python
+
+from django.contrib.auth.decorators import login_required
+from .forms import UserEditForm, ProfileEditForm
+
+@login_required
+def edit(request):
+    if request.method == 'POST':
+        user_form = UserEditForm(instance=request.user, data=request.POST)
+        profile_form = ProfileEditForm(instance=request.user.profile, data=request.POST, files=request.FILES)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            return redirect('profile')
+    else:
+        user_form = UserEditForm(instance=request.user)
+        profile_form = ProfileEditForm(instance=request.user.profile)
+    return render(request, 'edit.html', {'user_form': user_form, 'profile_form': profile_form})
+
+Create Profile Edit Template:
+
+Create templates/edit.html:
+
+html
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Edit your profile</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ user_form.as_p }}
+    {{ profile_form.as_p }}
+    <button type="submit" class="btn
+
+go on
+ChatGPT
+
+html
+
+btn-primary">Save changes</button>
+</form>
+{% endblock %}
+
+Update URL Configuration:
+
+Edit store/urls.py:
+
+python
+
+from django.urls import path
+from django.contrib.auth.views import LogoutView
+from . import views
+
+urlpatterns = [
+    # Other URL patterns
+    path('profile/', views.profile, name='profile'),
+    path('edit/', views.edit, name='edit'),
+]
+
+Now users can register, login, logout, reset their password, and manage their profiles on our e-commerce platform. These features enhance user experience and security, making the platform more robust and user-friendly.
+go
+ChatGPT
+
+It seems like you're asking me to continue, but I'm not sure what specific information or task you'd like me to provide or complete. Could you please clarify or let me know what you'd like to do next?
+yes
+ChatGPT
+
+Got it! What would you like to do next? Are you looking for more information, assistance with something specific, or do you have a question in mind?
+go on to the functions
+ChatGPT
+
+Sure, what specific functions or features would you like to discuss or work on? Let me know, and I can provide guidance or assistance accordingly.
+code
+ChatGPT
+
+Certainly! Could you please specify which part of the code or which functions you would like to work on or discuss? That way, I can provide more targeted assistance or guidance.
