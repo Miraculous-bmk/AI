@@ -1,4 +1,4 @@
-{% extends 'store/base.html' %}
+{% extends 'store/index.html' %}
 {% block content %}
 <h2>Order History</h2>
 <table class="table table-striped">
@@ -22,3 +22,60 @@
     </tbody>
 </table>
 {% endblock %}
+{% extends 'store/base.html' %}
+{% load static %}
+{% block hero-container %}
+<div class="hero">
+    <div class="hero-slider">
+        <img src="{% static 'img/hero-image-1.jpg' %}" alt="Hero Image 1">
+        <img src="{% static 'img/hero-image-2.jpg' %}" alt="Hero Image 2">
+        <img src="{% static 'img/hero-image-3.jpg' %}" alt="Hero Image 3">
+    </div>
+    <div class="hero-content">
+        <h1>Welcome to Cheese Store</h1>
+        <p>Discover the finest selection of cheeses from around the world.</p>
+        <a href="#" class="btn btn-primary">Shop Now</a>
+    </div>
+</div>
+
+<div class="container">
+    <section class="latest-updates">
+        <h2>Latest Updates</h2>
+        <div class="updates-ticker">
+            <ul>
+                <li>New artisanal cheeses added to our collection.</li>
+                <li>Special discounts on select cheese varieties.</li>
+                <li>Upcoming cheese tasting events in your area.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="about-us">
+        <h2>About Us</h2>
+        <p>At Cheese Store, we are passionate about bringing you the finest cheeses from around the globe. With a wide selection of artisanal and specialty cheeses, we cater to cheese lovers of all tastes.</p>
+    </section>
+
+    <section class="products">
+        <h2>Our Products</h2>
+        <div class="product-grid">
+            <div class="product-item">
+                <img src="{% static 'img/product-1.jpg' %}" alt="Product 1">
+                <h3>Aged Cheddar</h3>
+                <p>A classic cheese with a sharp and tangy flavor.</p>
+            </div>
+            <div class="product-item">
+                <img src="{% static 'img/product-2.jpg' %}" alt="Product 2">
+                <h3>Creamy Brie</h3>
+                <p>A soft and buttery cheese with a mild flavor.</p>
+            </div>
+            <!-- Add more product items -->
+        </div>
+    </section>
+
+    <section class="marketing">
+        <h2>Marketing and Distribution</h2>
+        <p>We partner with trusted distributors to ensure our cheeses reach cheese enthusiasts worldwide. Our marketing efforts focus on showcasing the unique qualities and flavors of each cheese variety.</p>
+    </section>
+</div>
+
+{% endblock hero-container %}

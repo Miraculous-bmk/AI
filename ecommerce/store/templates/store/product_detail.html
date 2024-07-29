@@ -1,4 +1,4 @@
-{% extends 'store/base.html' %}
+{% extends 'store/index.html' %}
 {% block content %}
 <div class="row">
     <div class="card col-md-6">
@@ -55,3 +55,71 @@
     <p><a href="{% url 'login' %}">Log in</a> to leave a review.</p>
 {% endif %}
 {% endblock %}
+<!-- Product Listing Page -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexora - Product Listing</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <!-- Header content here -->
+    </header>
+    <main>
+        <div class="container">
+            <h2 class="page-title">Shop Now</h2>
+            <div class="product-list">
+                <div class="product-card">
+                    <img src="product1.jpg" alt="Product 1">
+                    <h3 class="product-title">Product 1</h3>
+                    <p class="product-price">$99.99</p>
+                    <a href="#" class="btn btn-primary">View Details</a>
+                </div>
+                <!-- Repeat product cards as needed -->
+            </div>
+        </div>
+    </main>
+    <footer>
+        <!-- Footer content here -->
+    </footer>
+    <script src="scripts.js"></script>
+</body>
+</html>
+<!-- Product Details Page -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexora - Product Details</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <!-- Header content here -->
+    </header>
+    <main>
+        <div class="container">
+            <div class="product-details">
+                <img src="product1.jpg" alt="Product 1">
+                <div class="product-info">
+                    <h2 class="product-title">Product 1</h2>
+                    <p class="product-price">$99.99</p>
+                    <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis libero ac metus cursus, in lobortis nisi hendrerit.</p>
+                    <div class="product-actions">
+                        <button class="btn btn-primary">Add to Cart</button>
+                        <button class="btn btn-secondary">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <!-- Footer content here -->
+    </footer>
+    <script src="scripts.js"></script>
+</body>
+</html>

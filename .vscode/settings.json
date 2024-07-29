@@ -5,15 +5,20 @@
         "Deutsch",
         "ecommerce",
         "hmenu",
+        "Metaverse",
         "navmet",
+        "Nexora",
         "nname",
+        "numbertext",
         "Português",
         "signin",
         "socialaccount",
         "stripbooks",
+        "stylecss",
         "viewsets",
         "vsar",
         "Watchlist",
         "Русский"
-    ]
+    ],
+    "files.autoSave": "afterDelay"
 }

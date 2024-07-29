@@ -4,7 +4,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from .models import Product, Order, Category, Review, User
+from .models import User, Product, Order, Category, Review
 from django.core.paginator import Paginator
 from django.conf import settings
 from web3 import Web3
@@ -20,10 +20,13 @@ def home(request):
 def product(request):
     products = Product.objects.all()
     categories = Category.objects.all()
-    paginator = Paginator(products, 12)  # Show 12 products per page
+    paginator = Paginator(products, 12)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     return render(request, "store/product.html",{'page_obj': page_obj, 'categories': categories})
+
+def setting(request):
+    return render(request, "store/setting.html")
 
 @login_required
 def profile(request):
