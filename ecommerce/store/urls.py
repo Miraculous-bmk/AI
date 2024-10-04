@@ -12,6 +12,7 @@ urlpatterns = [
     path('search/', views.search, name='search'),
     path('product/', views.product, name='product'),
     path('setting/', views.setting, name='setting'),
+    path('collection/', views.collection_view, name='collection_view'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,45 @@
+{% extends 'frontend/base.html' %}
+{% block stylecss %}
+  
+{% endblock stylecss %}
+{% block content %}
+<section class="login">
+    <img class="group" src="./img/logo.png" />
+    <input type="checkbox" id="chk" aria-hidden="true">
+    <div class="social-sign-up">
+        <div class="social-option">
+            <div class="icon-wrapper google-color">
+                <i class='bx bxl-google'></i>
+            </div>
+            <div class="text-wrapper">
+                <a href="#" onclick="openGoogleSignInPopup()">Google</a>
+            </div>
+        </div>
+        <div class="social-option" >
+            <div class="icon-wrapper facebook-color">
+                <i class='bx bxl-facebook-circle'></i>
+            </div>
+            <div class="text-wrapper">
+                <a href="#" onclick="openFacebookSignInPopup()">Facebook</a>
+            </div>
+        </div>
+    </div>
+    <div class="log">
+        <form>
+            <label for="chk" aria-hidden="true">Login</label>
+            <input type="email" name="email" placeholder="Email" required="">
+            <div class="password-container">
+                <input id="loginPasswordInput" type="password" placeholder="Password">
+                <div class="show-icon"><i id="loginPasswordShow" class='bx bx-show'></i></div>
+                <div class="hide-icon"><i id="loginPasswordHide" class='bx bxs-hide'></i></div>
+            </div>
+            <div class="login-options">
+                <p class="links">
+                    <a href="#">Reset Password</a>
+                </p>
+            </div>
+            <button>Sign up</button>
+        </form>
+    </div>
+</section>
+{% endblock content %}  .

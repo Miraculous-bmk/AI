@@ -2,32 +2,34 @@
 <html lang="en">
 
 <head>
-    
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Nexora - Your go-to e-commerce platform">
     <meta name="keywords" content="e-commerce, online shopping, web3, crypto">
-    
+
     <title>Nexora</title>
     {% load static %}
 
     <link rel="stylesheet" href="{% static 'css/header-style.css' %}">
-    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/contact.css' %}">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    
+
+    <link href="https://unpkg.com/boxicons/css/boxicons.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Preconnect to Google Fonts -->
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     {% block stylesheet %}{% endblock stylesheet %}
     <!-- Poppins Font -->
-    
+
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
@@ -36,7 +38,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Noto+Sans+KR:wght@100..900&family=Noto+Sans+TC:wght@100..900&family=Outfit:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
         rel="stylesheet">
-        
+
 </head>
 
 <body>
@@ -152,7 +154,7 @@
             </div>
         </nav>
     </header>
-    
+
     <main>
         <section class="hero">
             <div class="search-bar-container">
@@ -204,7 +206,8 @@
                         <img src="{% static 'img/images/hero.jpg' %}" alt="" class="slide-image">
                         <div class="slide-content">
                             <h2 class="slide-boss-title">NEXORA</h2>
-                            <p class="slide-text">Explore our collections, we bring you the best products, fast shipping, digital asset and excellent customer service.</p>
+                            <p class="slide-text">Explore our collections, we bring you the best products, fast
+                                shipping, digital asset and excellent customer service.</p>
                             <a href="#" class="btn btn-outline">Signin</a>
                             <a href="#" class="btn btn-outline">Login</a>
                         </div>
@@ -221,7 +224,8 @@
                         <img src="{% static 'img/images/hero2.jpg' %}" alt="" class="slide-image">
                         <div class="slide-content">
                             <h2 class="slide-title">DIGITAL ASSETS</h2>
-                            <p class="slide-text">Dive into the world of virtual goods and explore their unique opportunities and benefits.</p>
+                            <p class="slide-text">Dive into the world of virtual goods and explore their unique
+                                opportunities and benefits.</p>
                             <a href="#" class="btn btn-outline">View Asset</a>
                         </div>
                     </div>
@@ -242,25 +246,262 @@
                 </div>
             </div>
         </section>
+
         <section class="frame">
             <div class="child">
                 <div class="icon"><i class="fas fa-shipping-fast"></i></div>
                 <div class="content">FREE AND FAST DELIVERY</div>
             </div>
             <div class="child">
-                <div class="icon"><i class="fas fa-shipping-cart"></i></div>
+                <div class="icon"><i class='bx bxl-shopify'></i></div>
                 <div class="content">EASY TO SHOP</div>
             </div>
             <div class="child">
-                <div class="icon"><i class="fas fa-undo"></i></div>
+                <div class="icon"><i class='bx bx-check-shield'></i></div>
                 <div class="content">MONEY BACK GUARANTEE</div>
             </div>
             <div class="child">
                 <div class="icon"><i class="fas fa-headset"></i></div>
                 <div class="content">24/7 CUSTOMER SERVICE</div>
             </div>
+        </section>        
+        
+        <section class="new-collection">
+            <div class="row">
+                <div class="item-big">
+                    <div class="text-tag">
+                        <h2 class="item-title">NEW COLLECTIONS</h2>
+                        <h3 class="item-total">Center Table</h3>
+                        <p>Description</p>
+                        <p>Description</p>
+                        <p>Description</p>
+                        <p>Description</p>
+                        <a href="#" class="btn item-view">View All &rarr;</a>
+                    </div>.new-collection .item-side
+                    <div class="img-tag">
+                        <img src="{% static 'img/images/table1.png' %}" alt="Placeholder Image 1">
+                    </div>
+                </div>
+                <div class="item-slide">
+                    <div class="text-tag">
+                        <h2 class="item-title">NEW COLLECTIONS</h2>
+                        <h3 class="item-total">Nike Shoe</h3>
+                        <p>Description</p>
+                        <p>Description</p>
+                        <p>Description</p>
+                        <p>Description</p>
+                        <a href="#" class="btn item-view">View All &rarr;</a>
+                    </div>
+                    <div class="item-slideshow">
+                        <div class="slides-item">
+                            <img src="{% static 'img/images/per.jpg' %}" alt="Placeholder Image 2">
+                        </div>
+                        <div class="slides-item">
+                            <img src="{% static 'img/images/shoe.jpg' %}" alt="Placeholder Image 2">
+                        </div>
+                        <div class="slides-item">
+                            <img src="{% static 'img/images/pafi.jpg' %}" alt="Placeholder Image 2">
+                        </div>
+                        <a class="prev" onclick="plusSlides(-1, 0)">&#10094;</a>
+                        <a class="next" onclick="plusSlides(1, 0)">&#10095;</a>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="text-tag">
+                        <h2 class="item-title">NEW COLLECTIONS</h2>
+                        <h3 class="item-total">Center Table</h3>
+                        <p>Description</p>
+                        <p>Description</p>
+                        <p>Description</p>
+                        <p>Description</p>
+                        <a href="#" class="btn item-view">View All &rarr;</a>
+                    </div>
+                    <div class="img-tag">
+                        <img src="{% static 'img/images/shoe.jpg' %}" alt="Placeholder Image 3">
+                    </div>
+                </div>
+                <div class="get-off">
+                    <a href="" class="btn get">Get Discounts</a>
+                    <h3 class="offer">20% OFFER</h3>
+                </div>
+                <div class="item-side">
+                    <div class="text-tag">
+                        <h2 class="item-title">NEW COLLECTIONS</h2>
+                        <h3 class="item-total">Center Table</h3>
+                        <p>Description</p>
+                        <p>Description</p>
+                        <p>Description</p>
+                        <p>Description</p>
+                        <a href="#" class="btn item-view">View All &rarr;</a>
+                    </div>
+                    <div class="img-tag">
+                        <img src="{% static 'img/images/shoe.jpg' %}" alt="Placeholder Image 5">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="new-collection">
+            <div class="row">
+                {% for part in item_big %}
+                <div class="item-big">
+                    <div class="text-tag">
+                        <h2 class="item-title">NEW COLLECTIONS</h2>
+                        <h3 class="item-total">{{ part.subtitle }}</h3>
+                        <p>{{ part.description }}</p>
+                        <a href="#" class="btn item-view">View All &rarr;</a>
+                    </div>
+                    <div class="img-tag">
+                        <img src="{{ part.image.url }}" alt="{{ part.subtitle }}">
+                    </div>
+                </div>
+                {% endfor %}
+        
+                {% for part in item_slideshow %}
+                <div class="item-slide">
+                    <div class="text-tag">
+                        <h2 class="item-title">NEW COLLECTIONS</h2>
+                        <h3 class="item-total">{{ part.subtitle }}</h3>
+                        <p>{{ part.description }}</p>
+                        <a href="#" class="btn item-view">View All &rarr;</a>
+                    </div>
+                    <div class="item-slideshow">
+                        {% for slide in part.slideshow_images.all %}
+                        <div class="slides-item">
+                            <img src="{{ slide.image.url }}" alt="Slideshow Image">
+                        </div>
+                        {% endfor %}
+                        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                    </div>
+                </div>
+                {% endfor %}
+        
+                {% for part in item %}
+                <div class="item">
+                    <div class="text-tag">
+                        <h2 class="item-title">NEW COLLECTIONS</h2>
+                        <h3 class="item-total">{{ part.subtitle }}</h3>
+                        <p>{{ part.description }}</p>
+                        <a href="#" class="btn item-view">View All &rarr;</a>
+                    </div>
+                    <div class="img-tag">
+                        <img src="{{ part.image.url }}" alt="{{ part.subtitle }}">
+                    </div>
+                </div>
+                {% endfor %}
+        
+                {% if discount_offer %}
+                <div class="get-off">
+                    <a href="{{ discount_offer.link }}" class="btn get">Get Discounts</a>
+                    <h3 class="offer">{{ discount_offer.offer_text }}</h3>
+                </div>
+                {% endif %}
+        
+                {% for part in item_side %}
+                <div class="item-side">
+                    <div class="text-tag">
+                        <h2 class="item-title">NEW COLLECTIONS</h2>
+                        <h3 class="item-total">{{ part.subtitle }}</h3>
+                        <p>{{ part.description }}</p>
+                        <a href="#" class="btn item-view">View All &rarr;</a>
+                    </div>
+                    <div class="img-tag">
+                        <img src="{{ part.image.url }}" alt="{{ part.subtitle }}">
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
         </section>
         
+
+
+        <section class="slider-wrapper">
+            <!-- Title on the top left side -->
+            <div class="slider-title left">
+                <h1>Featured Items</h1>
+            </div>
+
+            <!-- Left navigation button -->
+            <button class="nav-button left" onclick="moveSlide(-1)">&#10094;</button>
+
+            <!-- Slider container -->
+            <div class="slider-container" id="slider">
+                <!-- Slide item 1 -->
+                <div class="item">
+                    <img src="https://via.placeholder.com/100" alt="Placeholder Image 1">
+                    <div>
+                        <h2>Item 1</h2>
+                        <p>Description for Item 1</p>
+                    </div>
+                </div>
+                <!-- Slide item 2 -->
+                <div class="item">
+                    <img src="https://via.placeholder.com/100" alt="Placeholder Image 2">
+                    <div>
+                        <h2>Item 2</h2>
+                        <p>Description for Item 2</p>
+                    </div>
+                </div>
+                <!-- Slide item 3 -->
+                <div class="item">
+                    <img src="https://via.placeholder.com/100" alt="Placeholder Image 3">
+                    <div>
+                        <h2>Item 3</h2>
+                        <p>Description for Item 3</p>
+                    </div>
+                </div>
+                <!-- Slide item 4 -->
+                <div class="item">
+                    <img src="https://via.placeholder.com/100" alt="Placeholder Image 4">
+                    <div>
+                        <h2>Item 4</h2>
+                        <p>Description for Item 4</p>
+                    </div>
+                </div>
+                <!-- Slide item 5 -->
+                <div class="item">
+                    <img src="https://via.placeholder.com/100" alt="Placeholder Image 5">
+                    <div>
+                        <h2>Item 5</h2>
+                        <p>Description for Item 5</p>
+                    </div>
+                </div>
+                <!-- Slide item 6 -->
+                <div class="item">
+                    <img src="https://via.placeholder.com/100" alt="Placeholder Image 6">
+                    <div>
+                        <h2>Item 6</h2>
+                        <p>Description for Item 6</p>
+                    </div>
+                </div>
+                <!-- Slide item 7 -->
+                <div class="item">
+                    <img src="https://via.placeholder.com/100" alt="Placeholder Image 7">
+                    <div>
+                        <h2>Item 7</h2>
+                        <p>Description for Item 7</p>
+                    </div>
+                </div>
+                <!-- Slide item 8 -->
+                <div class="item">
+                    <img src="https://via.placeholder.com/100" alt="Placeholder Image 8">
+                    <div>
+                        <h2>Item 8</h2>
+                        <p>Description for Item 8</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right navigation button -->
+            <button class="nav-button right" onclick="moveSlide(1)">&#10095;</button>
+
+            <!-- Title on the top right side -->
+            <div class="slider-title right">
+                <h1>Exclusive Deals</h1>
+            </div>
+        </section>
+
         <!-- Categories section -->
         <section class="categories">
             <div class="container">
@@ -345,6 +586,7 @@
     </footer>
     <script src="{% static 'js/hero.js' %}"></script>
     <script src="{% static 'js/home.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>

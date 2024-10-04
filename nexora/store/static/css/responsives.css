@@ -1,0 +1,524 @@
+@media (max-width: 768px) {
+    .navbar.header-top {
+        flex-direction: row;
+        flex-wrap: nowrap;
+    }
+
+    .logo-container,
+    .user-nav {
+        flex: 0 0 auto;
+    }
+
+    .search-bar-container {
+        flex: 1 1 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media (max-width: 320px) {
+    /* Logo Container */
+    .logo-octahedron {
+        width: 20px;
+        height: 20px;
+    }
+
+    .face {
+        width: 22px;
+        height: 22px;
+        font-size: 0.7rem;
+    }
+
+    .face.front {
+        transform: rotateY(0deg) translateZ(10.5px);
+    }
+
+    .face.back {
+        transform: rotateY(180deg) translateZ(10.5px);
+    }
+
+    .face.right {
+        transform: rotateY(90deg) translateZ(10.5px);
+    }
+
+    .face.left {
+        transform: rotateY(-90deg) translateZ(10.5px);
+    }
+
+    .face.top {
+        transform: rotateX(90deg) translateZ(10.5px);
+    }
+
+    .face.bottom {
+        transform: rotateX(-90deg) translateZ(10.5px);
+    }
+
+    .logo-x {
+        padding: 2px 5px;
+    }
+
+    .logo-text {
+        font-size: 1rem;
+        margin-right: 3px;
+    }
+
+    .logo-icon {
+        width: 18px;
+        height: 18px;
+        font-size: 0.8rem;
+    }
+
+    /* Search Bar */
+    .header-bar-container,
+    .search-bar-container {
+        flex: 1 1 auto;
+        padding: 0 5px;
+        width: 20pxz
+    }
+
+    .search-bar {
+        margin: 0 10px;
+        border-radius: 2px;
+    }
+
+    .option-bar {
+        height: 30px;
+        font-size: 10px;
+    }
+
+    .option-bar option {
+        font-size: 10px;
+    }
+
+    #nav-search-bar-form .nav-fill input[type="text"] {
+        padding: 0.2rem;
+        font-size: 14px;
+    }
+
+    #nav-search-bar-form .nav-right button {
+        padding: 0.3rem;
+        height: 30px;
+        font-size: 14px;
+    }
+
+    #nav-search-bar-form .nav-right .fas {
+        font-size: 14px;
+    }
+
+    /* User Navigation */
+    .user-nav {
+        gap: 10px;
+    }
+
+    #nav-cart {
+        font-size: 12px;
+    }
+
+    #nav-cart-count {
+        font-size: 10px;
+    }
+
+    .nav-cart-icon {
+        font-size: 18px;
+    }
+
+    .nav-line-1,
+    .nav-line-2 {
+        font-size: 10px;
+    }
+
+    .language-button #language-code {
+        font-size: 12px;
+    }
+
+    .settings-button {
+        font-size: 14px;
+    }
+
+    .settings-content {
+        width: 180px;
+        height: 400px;
+    }
+
+    .settings-content a {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 991px) {
+    .nav-middle {
+        justify-content: start;
+    }
+
+    .user-bar ul li a {
+        position: absolute;
+        right: 10px;
+        top: 15px;
+        display: inline-flex;
+        align-items: center;
+        /* flex-direction: row; */
+    }
+
+    .user-bar ul li span {
+        margin-right: 3.5rem;
+    }
+
+    .navbar-toggler-icon {
+        width: 10px;
+        height: 10px;
+    }
+
+}
+
+/* Media Queries for Responsiveness */
+@media only screen and (max-width: 480px) {
+    .logo-x {
+        padding: 0.5px 1.5px;
+    }
+
+    .logo-icon {
+        width: 18px;
+        height: 18px;
+        font-size: 0.8rem;
+    }
+
+    .logo-text {
+        font-size: 1rem;
+
+    }
+
+    .user-nav {
+        width: 160px;
+    }
+
+    #nav-cart {
+        margin-right: 0;
+    }
+
+    #nav-cart-count {
+        min-width: 8px;
+        font-size: 10px;
+    }
+
+    .nav-cart-icon {
+        font-size: 18px;
+    }
+
+    .nav-line-1 {
+        font-size: 8px;
+    }
+
+    .nav-line-2 {
+        font-size: 12px;
+    }
+
+    .nav-arrow {
+        font-size: 8px;
+    }
+
+    .language-button,
+    .settings-button {
+        font-size: 15px;
+    }
+
+}
+
+@media only screen and (max-width: 320px) {
+    .logo-box {
+        padding: 0.5px 1px;
+    }
+
+    .logo-icon {
+        width: 18px;
+        height: 18px;
+        font-size: 0.8rem;
+    }
+
+    .logo-text {
+        font-size: 1rem;
+    }
+
+    .user-nav {
+        width: 160px;
+    }
+
+    #nav-cart {
+        margin-right: 0;
+    }
+
+    #nav-cart-count {
+        min-width: 8px;
+        font-size: 10px;
+    }
+
+    .nav-cart-icon {
+        font-size: 18px;
+    }
+
+    .nav-line-1 {
+        font-size: 8px;
+    }
+
+    .nav-line-2 {
+        font-size: 12px;
+    }
+
+    .nav-arrow {
+        font-size: 8px;
+    }
+
+    .language-button,
+    .settings-button {
+        font-size: 15px;
+    }
+
+}
+
+/* Mobile Devices */
+@media (max-width: 767px) {
+
+    .header-top,
+    .header-bottom {
+        padding: 0.5rem 10px;
+    }
+
+    .logo-box {
+        padding: 3px 6px;
+    }
+
+}
+
+/* Tablets and Small Desktops */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+    .header-top,
+    .header-bottom {
+        padding: 1rem 15px;
+    }
+
+    .logo-box {
+        padding: 4px 8px;
+    }
+}
+
+
+/* Media Queries for Responsiveness */
+@media only screen and (max-width: 480px) {
+    .search-bar-container {
+        max-width: 100%;
+        padding: 0 5px;
+    }
+
+    .search-bar {
+        margin: 0 5px;
+    }
+
+    .option-bar {
+        font-size: 8px;
+        height: 32px;
+        max-width: 28%;
+    }
+
+    .option-bar option {
+        font-size: 9px;
+    }
+
+    .slide-title {
+        font-size: 1.2rem;
+    }
+
+    .slide-text {
+        font-size: 0.8rem;
+    }
+
+    #nav-search-bar-form .nav-fill input[type="text"] {
+        font-size: 11px;
+        padding: 4.2px;
+    }
+
+    #nav-search-bar-form .nav-right button {
+        font-size: 12px;
+    }
+
+    .slideshow-container {
+        height: 300px;
+    }
+
+}
+
+@media only screen and (max-width: 320px) {
+    .search-bar-container {
+        max-width: 100%;
+        padding: 0 2px;
+    }
+
+    .search-bar {
+        margin: 0 2px;
+    }
+
+    .option-bar {
+        font-size: 8px;
+        padding: 0.1rem;
+        height: 32px;
+    }
+
+    .slide-title {
+        font-size: 1.1rem;
+    }
+
+    .slide-text {
+        font-size: 0.7rem;
+    }
+
+    #nav-search-bar-form .nav-fill input[type="text"] {
+        font-size: 10px;
+    }
+
+    #nav-search-bar-form .nav-right button {
+        font-size: 10px;
+    }
+
+    .slideshow-container {
+        height: 250px;
+    }
+
+}
+
+/* Small devices (600px and down) */
+@media (max-width: 600px) {
+    .search-bar-container {
+        max-width: 100%;
+        padding: 0 10px;
+    }
+
+    .search-bar {
+        margin: 0 10px;
+    }
+
+    .option-bar {
+        font-size: 10px;
+        padding: 0.2rem;
+    }
+
+    .slide-title {
+        font-size: 1.5rem;
+    }
+
+    .slide-text {
+        font-size: 1rem;
+    }
+
+    #nav-search-bar-form .nav-fill input[type="text"] {
+        font-size: 14px;
+    }
+
+    #nav-search-bar-form .nav-right button {
+        font-size: 14px;
+        height: 30px;
+    }
+
+    #nav-search-bar-form .nav-right .fas {
+        font-size: 14px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+
+    .slide-title {
+        font-size: 2rem;
+    }
+
+    .slide-text {
+        font-size: 1.2rem;
+    }
+
+    #nav-search-bar-form .nav-fill input[type="text"] {
+        font-size: 14px;
+    }
+
+    #nav-search-bar-form .nav-right button {
+        font-size: 14px;
+    }
+
+    .slideshow-container {
+        height: 400px;
+    }
+
+    .mySlides,
+    .slide-image {
+        height: 400px;
+    }
+}
+
+/* Medium devices (600px to 1024px) */
+@media (min-width: 601px) and (max-width: 1024px) {
+
+    .search-bar-container {
+        max-width: 800px;
+        padding: 0 20px;
+    }
+
+    .search-bar {
+        margin: 0 15px;
+    }
+
+    .option-bar select {
+        font-size: 11px;
+        padding: 0.25rem;
+    }
+
+    .slide-title {
+        font-size: 2rem;
+    }
+
+    .slide-text {
+        font-size: 1.2rem;
+    }
+
+    #nav-search-bar-form .nav-fill input[type="text"] {
+        font-size: 15px;
+    }
+
+    #nav-search-bar-form .nav-right button {
+        font-size: 15px;
+        height: 34px;
+    }
+
+    #nav-search-bar-form .nav-right .fas {
+        font-size: 15px;
+    }
+}
+
+/* Large devices (1025px and up) */
+@media (min-width: 1025px) {
+    .search-bar-container {
+        max-width: 900px;
+        padding: 0 30px;
+    }
+
+    .search-bar {
+        margin: 0 20px;
+    }
+
+    .slide-title {
+        font-size: 3rem;
+    }
+
+    .slide-text {
+        font-size: 1.5rem;
+    }
+
+    #nav-search-bar-form .nav-fill input[type="text"] {
+        font-size: 16px;
+    }
+
+    #nav-search-bar-form .nav-right button {
+        font-size: 16px;
+        height: 36px;
+    }
+
+    #nav-search-bar-form .nav-right .fas {
+        font-size: 16px;
+    }
+}

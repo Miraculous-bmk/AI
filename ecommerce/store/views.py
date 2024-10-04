@@ -4,7 +4,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from .models import User, Product, Order, Category, Review
+from .models import User, Product, Order, Category, Review, CollectionPart, DiscountOffer
 from django.core.paginator import Paginator
 from django.conf import settings
 from web3 import Web3
@@ -132,3 +132,21 @@ def add_review(request, product_id):
             rating=rating,
         )
     return redirect('product_detail', product_id=product.id)
+
+
+def collection_view(request):
+    item_big = CollectionPart.objects.filter(part_type='item-big')
+    item_slideshow = CollectionPart.objects.filter(part_type='item-slide')
+    item = CollectionPart.objects.filter(part_type='item')
+    item_side = CollectionPart.objects.filter(part_type='item-side')
+    discount_offer = DiscountOffer.objects.first()  # Assuming there's only one discount offer
+
+    context = {
+        'item_big': item_big,
+        'item_slideshow': item_slideshow,
+        'item': item,
+        'item_side': item_side,
+        'discount_offer': discount_offer,
+    }
+    
+    return render(request, 'store/home.html', context)

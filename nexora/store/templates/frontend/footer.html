@@ -1,0 +1,265 @@
+<head>
+   {% load static %}
+   <link rel="stylesheet" href="{% static './css/footers.css' %}">
+</head>
+<body>
+    <div class="footer-top">
+        <div class="col-lg-4 col-md-12 col-sm-12">
+            <div class="footer-box">
+                <div class="footer-logo">
+                    <div class="logo">
+                        <div class="logo-octahedron">
+                            <div class="face front"><i class="fas fa-shopping-cart"></i></div>
+                            <div class="face back"><i class="fab fa-bitcoin "></i></div>
+                            <div class="face right"><i class="fas fa-shipping-fast"></i></div>
+                            <div class="face left"><i class="fas fa-wallet"></i></div>
+                            <div class="face top"><i class="fas fa-globe"></i></div>
+                            <div class="face bottom"><i class="fab fa-ethereum"></i></div>
+                        </div>
+                        <div class="logo-x">
+                            <span class="logo-text">Nexora</span>
+                            <div class="logo-icon"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="web3">
+                    <div class="web3-con">
+                        <p> The Future Is Here leader in providing innovative</p>
+                        <p>Company: Nexora</p>
+                        <p>Certification: BBB Accredited Business</p>
+                    </div>
+                    <div class="footer-payments">
+                        <div class="web-payment">
+                            <img src="{% static 'images/new/alnmok.png' %}" alt="wbe3">
+                            <img src="{% static 'images/logos/pay2.png' %}" alt="wbe3">
+                            <img src="{% static 'images/logos/pay.png' %}" alt="Payment Method 1">
+                            <img src="{% static 'images/logos/pay3.png' %}" alt="Payment Method 2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-7 col-md-12 col-sm-12">
+            <div class="footer-box">
+                <div class="newsletter-form">  <!-- Initially hidden -->
+                    <img class="form-responsive" src="{% static 'images/img/hero-k.jpg' %}" alt="form-responsive">
+                    <div class="newsletter-box">
+                        <h2 class="title-tag">Subscribe To Our Newsletter</h2>
+                        <p class="Subscribe-tag">Subscribe to our newsletter today to receive updates on the latest news.</p>
+                        <form id="subscribe-form" method="POST" action="{% url 'subscribe' %}">
+                            {% csrf_token %}
+                            <input type="email" name="email" placeholder="Enter your email address" required>
+                            
+                            <!-- Dropdown to select channels -->
+                            <div class="dropdown channel-options-dropdown">
+                                <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Channels
+                                </button>
+                                <ul class="dropdown-menu channel-options">
+                                    <li>
+                                        <label>
+                                            <input type="checkbox" id="all" name="channels" value="all" checked>
+                                            Subscribe to All Channels
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label>
+                                            <input type="checkbox" id="news" name="channels" value="news">
+                                            News & Updates
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label>
+                                            <input type="checkbox" id="offers" name="channels" value="offers">
+                                            Exclusive Offers
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label>
+                                            <input type="checkbox" id="events" name="channels" value="events">
+                                            Events & Webinars
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label>
+                                            <input type="checkbox" id="blog" name="channels" value="blog">
+                                            Blog Updates
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+            
+                            <button type="submit" class="subscribe-btn">Subscribe</button>
+                        </form>
+                        
+                        <!-- Success and Error Messages -->
+                        {% if messages %}
+                            <div class="message-container">
+                                {% for message in messages %}
+                                    <p class="message {{ message.tags }}">{{ message }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}                        
+                    </div>
+                </div>
+            </div>              
+        </div>              
+    </div>
+    <div class="footer-main">
+        <div class="row" id="information">
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <div class="footer-top-box">
+                    <h3>Connect with Us</h3>
+                    <div class="footer-online">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-google-plus" aria-hidden="true"></i></a>
+                        <a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p" aria-hidden="true"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="footer-offline">
+                        <p><i class="fas fa-map-marker-alt"></i> Address: 123 Blockchain Blvd, WebCity, WC 45678</p>
+                        <p><i class="fas fa-envelope"></i> Email: <a
+                                href="mailto:support@web3ecommerce.com">support@web3ecommerce.com</a></p>
+                        <p><i class="fas fa-phone-square"></i> Phone: <a href="tel:+1234567890">+1 (234) 567-890</a>
+                        </p>
+                        <p>Business hours:</p>
+                        <ul>
+                            <li>Monday - Friday: 08:00 AM to 05:00 PM</li>
+                            <li>Saturday: 10:00 AM to 08:00 PM</li>
+                            <li>Sunday: <span>Closed</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-12 col-sm-12">
+                <div class="footer-link">
+                    <h3>Information</h3>
+                    <div class="footer-links">
+                        <a href="#">Shop</a>
+                        <a href="#">About Us</a>
+                        <a href="#">Customer Service</a>
+                        <a href="#">Our Sitemap</a>
+                        <a href="#">Terms &amp; Service</a>
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Delivery Information</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <div class="footer-support">
+                    <h3>Customer Support</h3>
+                    <div class="footer-links">
+                        <a href="#">FAQ</a>
+                        <a href="#">Shipping Information</a>
+                        <a href="#">Return Policy</a>
+                        <a href="#">Order Tracking</a>
+                        <a href="#">Support Center</a>
+                        <div class="to-top">
+                            <a href="#">Support</a>
+                            <a href="#" class="return-to-top">Return to Top</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-partner">
+        <div class="row" id="our-partner">
+            <div class="partner">
+                <h4>Our Partners</h4>
+                <div class="partner-slideshow">
+                    <div class="partner-wrapper">
+                        <img src="{% static 'images/logos/logo1.png' %}" alt="Partner 1">
+                        <img src="{% static 'images/logos/coin3.png' %}" alt="Partner 2">
+                        <img src="{% static 'images/logos/6.png' %}" alt="Partner 3">
+                        <img src="{% static 'images/logos/1.png' %}" alt="Partner 4">
+                        <img src="{% static 'images/logos/pay2.png' %}" alt="Partner 5">
+                        <img src="{% static 'images/logos/4.png' %}" alt="Partner 6">
+                        <img src="{% static 'images/logos/2.png' %}" alt="Partner 7">
+                        <img src="{% static 'images/logos/pay5.png' %}" alt="Partner 8">
+                        <img src="{% static 'images/logos/logo6.png' %}" alt="Partner 9">
+                        <img src="{% static 'images/logos/7.png' %}" alt="Partner 10">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-world">
+        <div class="row" id="blog-w">
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <div class="footer-widget">
+                    <h4>About Freshshop</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip exeacommodo consequat.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. </p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <div class="footer-blog">
+                    <div class="blog">
+                        <h3>Latest Blog Posts</h3>
+                        <ul class="cool-list">
+                            <li><a href="#"><i class="fas fa-chart-line"></i> How Web3 is Revolutionizing E-commerce</a></li>
+                            <li><a href="#"><i class="fas fa-shield-alt"></i> Top 10 Tips for Secure Online
+                                    Shopping</a></li>
+                            <li><a href="#"><i class="fab fa-bitcoin"></i> Understanding Cryptocurrency Payments</a>
+                            </li>
+                            <li><a href="#"><i class="fas fa-cubes"></i> The Future of NFTs in Retail</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <div class="footer-responsibility">
+                    <h3>Social Responsibility</h3>
+                    <p>We believe in making a meaningful impact on the world by giving back to the community. Our
+                        approach centers on sustainability and ethical practices that ensure a brighter future for
+                        everyone. We actively prioritize eco-friendly solutions, such as using sustainable packaging
+                        that reduces waste and minimizes our environmental footprint.Through these efforts, we
+                        strive to create a positive, lasting change for the planet and its people.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row" id="Careers">
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <!-- Careers Section -->
+                <div class="footer-careers">
+                    <h3>Careers</h3>
+                    <p>Join our team and help shape the future of e-commerce. <a href="#">See current openings</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <!-- Investor Relations Section -->
+                <div class="footer-investor">
+                    <h3>Investor Relations</h3>
+                    <p>For financial information and investor resources, <a href="#">click here</a>.</p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <!-- Accessibility Section -->
+                <div class="footer-accessibility">
+                    <h3>Accessibility</h3>
+                    <p>We are committed to ensuring digital accessibility for all users. If you experience any
+                        issues, <a href="#">contact us</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2024 E-commerce Store. All rights reserved.</p>
+    </div>
+</body>
