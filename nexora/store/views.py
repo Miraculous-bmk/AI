@@ -11,19 +11,18 @@ def subscribe(request):
             channels = form.cleaned_data['channels']
             
             # Save the new subscriber
-            channels_str = ','.join(channels)  # Convert channels to comma-separated string
+            channels_str = ','.join(channels)  
             NewsletterSubscriber.objects.create(email=email, channels=channels_str)
             
             # Success message
             messages.success(request, "Thank you for subscribing!")
-            return redirect('base')  # Redirect to home or another page
+            return redirect('index') 
         else:
-            # If form is invalid, display an error message
             messages.error(request, "There was an error with your submission. Please try again.")
     else:
         form = SubscriptionForm()
 
-    return render(request, 'frontend/base.html', {'form': form})
+    return render(request, 'pilar/base.html', {'form': form})
 
 def index(request):
     return render(request, 'frontend/index.html')
@@ -34,4 +33,4 @@ def search(request):
     return render(request, 'frontend/search.html', {'products': products, 'query': query})
 
 def setting(request):
-    return render(request, "frontend/setting.html")
+    return render(request, "pilar/setting.html")
