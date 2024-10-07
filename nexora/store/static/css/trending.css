@@ -1,0 +1,215 @@
+.trending-products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 30px 60px;
+    background-color: var(--bu-color);
+}
+
+.trending {
+    width: 100%;
+    justify-content: center;
+    gap: 25px;
+}
+
+.trend-com {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.trend-com .title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--link-color);
+}
+
+.view-all .btn.link-best {
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    border-radius: 18px;
+    background-color: var(--text-color);
+    color: var(--link-color);
+    text-decoration: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, color 0.3s;
+}
+.view-all .btn.link-best:hover{
+    background-color: var(--link-color);
+    color: var(--text-color);
+}
+
+.product-categories {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.product-categories input {
+    display: none;
+}
+
+.product-categories label {
+    font-size: 14px;
+    margin: 0 10px;
+    padding: 5px 10px;
+    background-color: v;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 20px;
+}
+
+.product-categories input:checked + label {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.product-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Product list styling */
+.product-list {
+    display: flex;
+    grid-template-columns: repeat(4, 1fr); 
+    grid-template-rows: repeat(auto-fit, minmax(200px, auto));
+    gap: 20px;
+    width: 100%;
+    background-color: var(--ba-color);
+    border-radius: 10px;
+    overflow: hidden;
+    justify-content: center;
+    text-align: center;
+    padding: 20px 30px;
+    box-sizing: border-box;
+    transition: transform 0.3s ease;
+}
+
+.product-card {
+    background-color: var(--bu-color);
+    width: 280px;
+    height: 300px;
+    border-radius: 15px;
+    border: 2px solid var(--link-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-card .pro-img {
+    display: flex;
+    position: relative;
+    justify-content: center;  
+    align-items: center;
+    height: 220px;
+    margin-top: 10px;
+    padding: 40px 10px;
+}
+
+.product-card .pro-img img {
+    max-width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.product-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: var(--text-shadow);
+    color: var(--text-color);
+    border-radius: 12.5px;
+}
+
+.product-info {
+    flex: 1;
+    text-align: left;  /* Align text to the left */
+    padding-left: 5px;
+}
+
+.head-text {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.product-details p {
+    margin: 5px 0 0;
+    font-size: 12px;
+}
+
+.product-card .add-to-cart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--link-color);
+    background-color: var(--text-color);
+    border-radius: 50%;
+    padding: 10px;
+    width: 35px;
+    height: 35px;
+    transition: background-color 0.3s ease;
+}
+
+.product-card .add-to-cart:hover {
+    color: var(--bg-color);
+}
+
+.product-card .add-to-cart i {
+    font-size: 16px;
+}
+
+.product-card .badge {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    justify-content: space-between;
+    padding: 10px 15px;
+}
+
+.discount-badge {
+    background-color: var(--text-shadow);
+    color: var(--text-color);
+    padding: 5px 10px;
+    height: 25px;
+    border-radius: 15px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.product-card .badge .wishlist {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    background-color: var(--input-color);
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    padding: 5px;
+    cursor:pointer;
+}
+
+.product-card .badge .wishlist .fas {
+    color: var(--text-color);
+    font-size: 16px;
+}
+
+.product-card .badge .wishlist.active .fas {
+    color: var(--love-color);
+}
+
+.product-card .badge .wishlist:hover {
+    background-color: var(--link-color);
+}
+
+/* Add transition for smooth color change */
+.product-card .badge .wishlist .fas {
+    transition: color 0.3s ease;
+}
