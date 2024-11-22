@@ -1,8 +1,8 @@
-{% extends 'pilar/base.html' %}
+{% extends 'base/base.html' %}
 {% load static %}
 {% block stylecss %}
 
-<link rel="stylesheet" href="{% static './css/style.css' %}">
+<link rel="stylesheet" href="{% static './css/styles.css' %}">
 <link href="https://unpkg.com/boxicons/css/boxicons.min.css" rel="stylesheet">
 {% endblock %}
 {% block hero %}
@@ -198,66 +198,19 @@
         </div>
         <div class="slider-cont">
             <div class="slider-wrapper">
+                {% for product in featured_products %}
                 <div class="slider-item">
                     <div class="user-image">
-                        <img class="image" src="{% static 'images/new/fun.png' %}" alt="Item 1">
+                        <img class="image" src="{{ product.image.url }}" alt="{{ product.name }}">
                     </div>
-                    <h3 class="item-name">Item Name 1</h3>
-                    <p class="price">$99.99</p>
+                    <h3 class="item-name">{{ product.name }}</h3>
+                    <p class="price">${{ product.price }}</p>
                 </div>
-                <div class="slider-item">
-                    <div class="user-image">
-                        <img class="image" src="{% static 'images/new/fun1.png' %}" alt="Item 2">
-                    </div>
-                    <h3 class="item-name">Item Name 2</h3>
-                    <p class="price">$89.99</p>
-                </div>
-                <div class="slider-item">
-                    <div class="user-image">
-                        <img class="image" src="{% static 'images/new/fun2.png' %}" alt="Item 3">
-                    </div>
-                    <h3 class="item-name">Item Name 3</h3>
-                    <p class="price">$79.99</p>
-                </div>
-                <div class="slider-item">
-                    <div class="user-image">
-                        <img class="image" src="{% static 'images/new/fun3.png' %}" alt="Item 4">
-                    </div>
-                    <h3 class="item-name">Item Name 4</h3>
-                    <p class="price">$69.99</p>
-                </div>
-                <div class="slider-item">
-                    <div class="user-image">
-                        <img class="image" src="{% static 'images/new/fun4.png' %}" alt="Item 5">
-                    </div>
-                    <h3 class="item-name">Item Name 5</h3>
-                    <p class="price">$59.99</p>
-                </div>
-                <div class="slider-item">
-                    <div class="user-image">
-                        <img class="image" src="{% static 'images/new/fun5.png' %}" alt="Item 6">
-                    </div>
-                    <h3 class="item-name">Item Name 6</h3>
-                    <p class="price">$49.99</p>
-                </div>
-                <div class="slider-item">
-                    <div class="user-image">
-                        <img class="image" src="{% static 'images/new/fun7.png' %}" alt="Item 7">
-                    </div>
-                    <h3 class="item-name">Item Name 7</h3>
-                    <p class="price">$39.99</p>
-                </div>
-                <div class="slider-item">
-                    <div class="user-image">
-                        <img class="image" src="{% static 'images/new/fun6.png' %}" alt="Item 8">
-                    </div>
-                    <h3 class="item-name">Item Name 8</h3>
-                    <p class="price">$29.99</p>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
-</section>
+</section>                
 
 <section class="flash">
     <div class="flash-container">
@@ -312,29 +265,9 @@
     </div>
 </section>
 
-<section class="bland-news">
-    <div class="bland">
-        <div class="bland-logo">
-            <div class="slide-bland" id="slideshow1">
-                <div class="slided"><img src="{% static 'images/new/fun1.png'}" alt="Company"></div>
-                <div class="slided"><img src="{% static 'images/new/fun2.png'}" alt="Company"></div>
-                <div class="slided"><img src="{% static 'images/new/fun3.png'}" alt="Company"></div>
-                <div class="slided"><img src="{% static 'images/new/fun4.png'}" alt="Company"></div>
-                <div class="slided"><img src="{% static 'images/new/fun5.png'}" alt="Company"></div>
-                <div class="slided"><img src="{% static 'images/new/fun6.png'}" alt="Company"></div>
-            </div>
-        </div>
-
-        <div class="crypto-news">
-            <div class="slide-bland" id="slideshow3">
-                <div class="slided"><img src="path/to/crypto-update1.jpg" alt="Crypto Update 1"></div>
-                <div class="slided"><img src="path/to/crypto-update2.jpg" alt="Crypto Update 2"></div>
-                <div class="slided"><img src="path/to/crypto-update3.jpg" alt="Crypto Update 3"></div>
-                <div class="slided"><img src="path/to/crypto-update4.jpg" alt="Crypto Update 4"></div>
-                <div class="slided"><img src="path/to/crypto-update5.jpg" alt="Crypto Update 5"></div>
-                <div class="slided"><img src="path/to/crypto-update6.jpg" alt="Crypto Update 6"></div>
-            </div>
-        </div>
+<section class="brand-news">
+    <div class="brand">
+        {% include 'news/newsline.html' %}
     </div>
 </section>
 
@@ -350,121 +283,36 @@
             <a class="btn link-best" href="">View all &rarr;</a>
         </div>
         <div class="category-cards">
-            <!-- Category Card 1 -->
+            {% for product in best_sell %}
             <div class="best-card">
                 <div class="best-img">
                     <div class="img-pri">
-                        <img src="{% static 'images/new/laptop1.png'%}" alt="Category 1">
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
                     </div>
                     <a class="wishlist" href="#"><i class='fas fa-heart'></i></a>
                 </div>
                 <div class="best-overlay">
-                    <h3 class="overlay-title">Electronics</h3>
+                    <h3 class="overlay-title">{{ product.name }}</h3>
                     <div class="price">
-                        <p class="price-now">50$</p>
-                        <p class="price-before">60$</p>
+                        <p class="price-now">{{ product.price_now }}$</p>
+                        {% if product.price_before %}
+                        <p class="price-before">{{ product.price_before }}$</p>
+                        {% endif %}
                     </div>
                     <div class="ratings">
-                        <a href="#"><i class="bx bxs-star"></i></a>
-                        <a href="#"><i class="bx bxs-star"></i></a>
-                        <a href="#"><i class="bx bxs-star"></i></a>
-                        <a href="#"><i class="bx bxs-star"></i></a>
-                        <a href="#"><i class="bx bxs-star-half"></i></a>
+                        {% for i in "12345" %}
+                            {% if product.rating >= i %}
+                                <a href="#"><i class="bx bxs-star"></i></a>
+                            {% elif product.rating >= i|add:'-0.5' %}
+                                <a href="#"><i class="bx bxs-star-half"></i></a>
+                            {% else %}
+                                <a href="#"><i class="bx bx-star"></i></a>
+                            {% endif %}
+                        {% endfor %}
                     </div>
                 </div>
             </div>
-            <!-- Category Card 2 -->
-            <div class="best-card">
-                <div class="best-img">
-                    <div class="img-pri">
-                        <img src="{% static 'images/new/fun.png'%}" alt="Category 2">
-                    </div>
-                    <a class="wishlist" href="#"><i class='fas fa-heart'></i></a>
-                </div>
-                <div class="best-overlay">
-                    <h3 class="overlay-title">Fashion</h3>
-                    <div class="price">
-                        <p class="price-now">50$</p>
-                        <p class="price-before"></p>
-                    </div>
-                    <div class="ratings">
-                        <a href="#"><i class="bx bxs-star"></i></a>
-                        <a href="#"><i class="bx bxs-star"></i></a>
-                        <a href="#"><i class="bx bxs-star"></i></a>
-                        <a href="#"><i class="bx bxs-star"></i></a>
-                        <a href="#"><i class="bx bxs-star-half"></i></a>
-                    </div>
-                </div>
-            </div>
-            <!-- Category Card 3 -->
-            <div class="best-card">
-                <div class="best-img">
-                    <div class="img-pri">
-                        <img src="{% static 'images/img/category3.jpg'%}" alt="Category 3">
-                    </div>
-                    <a class="wishlist" href="#"><i class='fas fa-heart'></i></a>
-                </div>
-                <div class="best-overlay">
-                    <h3 class="overlay-title">Health & Wellness</h3>
-                    <div class="price">
-                        <p class="price-now">50$</p>
-                        <p class="price-before"></p>
-                    </div>
-                    <div class="ratings">
-                        <a href="#"><i class="bx bxs-star"></i></a>
-                        <a href="#"><i class="bx bxs-star"></i></a>
-                        <a href="#"><i class="bx bxs-star"></i></a>
-                        <a href="#"><i class="bx bxs-star"></i></a>
-                        <a href="#"><i class="bx bxs-star-half"></i></a>
-                    </div>
-                </div>
-            </div>
-            <!-- Category Card 4 -->
-            <div class="best-card">
-                <div class="best-img">
-                    <div class="img-pri">
-                        <img src="{% static 'images/new/camera2.png'%}" alt="Category 4">
-                    </div>
-                    <a class="wishlist" href="#"><i class='fas fa-heart'></i></a>
-                </div>
-                <div class="best-overlay">
-                    <h3 class="overlay-title">Electronics</h3>
-                    <div class="price">
-                        <p class="price-now">50$</p>
-                        <p class="price-before"></p>
-                    </div>
-                    <div class="ratings">
-                        <a href="#"><i class="bx bxs-star"></i></a>
-                        <a href="#"><i class="bx bxs-star"></i></a>
-                        <a href="#"><i class="bx bxs-star"></i></a>
-                        <a href="#"><i class="bx bxs-star"></i></a>
-                        <a href="#"><i class="bx bxs-star-half"></i></a>
-                    </div>
-                </div>
-            </div>
-            <!-- Category Card 5 -->
-            <div class="best-card">
-                <div class="best-img">
-                    <div class="img-pri">
-                        <img src="{% static 'images/new/camera3.png'%}" alt="Category 5">
-                    </div>
-                    <a class="wishlist" href="#"><i class='fas fa-heart'></i></a>
-                </div>
-                <div class="best-overlay">
-                    <h3 class="overlay-title">Electronics</h3>
-                    <div class="price">
-                        <p class="price-now">50$</p>
-                        <p class="price-before"></p>
-                    </div>
-                    <div class="ratings">
-                        <a href="#"><i class="bx bxs-star"></i></a>
-                        <a href="#"><i class="bx bxs-star"></i></a>
-                        <a href="#"><i class="bx bxs-star"></i></a>
-                        <a href="#"><i class="bx bxs-star"></i></a>
-                        <a href="#"><i class="bx bxs-star-half"></i></a>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section>
@@ -472,32 +320,18 @@
 <!-- Deals section -->
 <section class="deals">
     <div class="deals-container">
-        <h2 class="section-title">Deals of the Day</h2>
+        <h2 class="section-title">Today's Deals</h2>
         <div class="deal-cards">
+            {% for deal in deals %}
             <div class="deal-card">
-                <img src="{% static 'images/img/deal1.jpg' %}" alt="Smartphone Sale">
+                <img src="{{ deal.image.url }}" alt="{{ deal.title }}">
                 <div class="card-overlay">
-                    <h3 class="deal-title">Smartphone Sale</h3>
-                    <p class="card-text">Up to 30% off on top smartphone brands.</p>
-                    <a href="#" class="btn btn-outline">Shop Now</a>
+                    <h3 class="deal-title">{{ deal.title }}</h3>
+                    <p class="card-text">{{ deal.description }}</p>
+                    <a href="{% url 'deals' %}" class="btn btn-outline">Shop Now</a>
                 </div>
             </div>
-            <div class="deal-card">
-                <img src="{% static 'images/img/deal2.jpg' %}" alt="Fashion Clearance">
-                <div class="card-overlay">
-                    <h3 class="deal-title">Fashion Clearance</h3>
-                    <p class="card-text">End of season clearance sale.</p>
-                    <a href="#" class="btn btn-outline">View Deals</a>
-                </div>
-            </div>
-            <div class="deal-card">
-                <img src="{% static 'images/img/deal3.jpg' %}" alt="Home Appliances">
-                <div class="card-overlay">
-                    <h3 class="deal-title">Home Appliances</h3>
-                    <p class="card-text">Great discounts on home appliances.</p>
-                    <a href="#" class="btn btn-outline">Discover</a>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section>

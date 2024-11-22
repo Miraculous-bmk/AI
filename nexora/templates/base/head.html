@@ -1,0 +1,154 @@
+<nav class="navbar header-top navbar-expand-lg">
+    <div class="logo-container">
+        <a href="{% url 'index' %}" class="logo-box">
+            <div class="logo-octahedron">
+                <div class="face front"><i class="fas fa-shopping-cart"></i></div>
+                <div class="face back"><i class="fab fa-bitcoin "></i></div>
+                <div class="face right"><i class="fas fa-shipping-fast"></i></div>
+                <div class="face left"><i class="fas fa-wallet"></i></div>
+                <div class="face top"><i class="fas fa-globe"></i></div>
+                <div class="face bottom"><i class="fab fa-ethereum"></i></div>
+            </div>
+            <div class="logo-x">
+                <span class="logo-text">Nexora</span>
+                <div class="logo-icon"></div>
+            </div>
+        </a>
+    </div>
+
+    <!-- {% if not request.path == '/' %} -->
+    <div class="header-bar-container" id="header-search-bar">
+        <div class="search-bar">
+            <div class="nav-fill">
+                <div id="nav-search">
+                    <form id="nav-search-bar-form" action="{% url 'search' %}" method="GET" role="search">
+                        <select class="option-bar nav-left" id="searchDropdownBox" name="url" onchange="this.form.submit()">
+                            <option value="all" {% if selected_category == "all" %}selected{% endif %}>All Collection</option>
+                            <option value="arts-crafts-intl-ship" {% if selected_category == "arts-crafts-intl-ship" %}selected{% endif %}>Arts &amp; Crafts</option>
+                            <option value="automotive-intl-ship" {% if selected_category == "automotive-intl-ship" %}selected{% endif %}>Automotive</option>
+                            <option value="baby-products-intl-ship" {% if selected_category == "baby-products-intl-ship" %}selected{% endif %}>Baby</option>
+                            <option value="beauty-intl-ship" {% if selected_category == "beauty-intl-ship" %}selected{% endif %}>Beauty &amp; Personal Care</option>
+                            <option value="books-intl-ship" {% if selected_category == "books-intl-ship" %}selected{% endif %}>Books</option>
+                            <option value="electronics-intl-ship" {% if selected_category == "electronics-intl-ship" %}selected{% endif %}>Computers &amp; Electronics</option>
+                            <option value="digital-music-intl-ship" {% if selected_category == "digital-music-intl-ship" %}selected{% endif %}>Digital Music</option>
+                            <option value="fashion-female-intl-ship" {% if selected_category == "fashion-female-intl-ship" %}selected{% endif %}>Female's Fashion</option>
+                            <option value="gift-card-intl-ship" {% if selected_category == "gift-card-intl-ship" %}selected{% endif %}>Gift Card</option>
+                            <option value="health-intl-ship" {% if selected_category == "health-intl-ship" %}selected{% endif %}>Health &amp; Household</option>
+                            <option value="kitchen-intl-ship" {% if selected_category == "kitchen-intl-ship" %}selected{% endif %}>Home &amp; Kitchen</option>
+                            <option value="industrial-intl-ship" {% if selected_category == "industrial-intl-ship" %}selected{% endif %}>Industrial &amp; Scientific</option>
+                            <option value="fashion-male-intl-ship" {% if selected_category == "fashion-male-intl-ship" %}selected{% endif %}>Male's Fashion</option>
+                            <option value="movies-tv-intl-ship" {% if selected_category == "movies-tv-intl-ship" %}selected{% endif %}>Movies, Games &amp; Music</option>
+                            <option value="software-intl-ship" {% if selected_category == "software-intl-ship" %}selected{% endif %}>Software</option>
+                            <option value="sporting-intl-ship" {% if selected_category == "sporting-intl-ship" %}selected{% endif %}>Sports &amp; Outdoors</option>
+                            <option value="tools-intl-ship" {% if selected_category == "tools-intl-ship" %}selected{% endif %}>Tools &amp; Improvement</option>
+                            {% for code, label in form.fields.category.choices %}
+                                <option value="{{ code }}" {% if selected_category == code %}selected{% endif %}>{{ label }}</option>
+                            {% endfor %}
+                        </select>
+                        <div class="nav-fill">
+                            <label for="searchDropdownBox" class="sr-only">Search Categories</label>
+                            <label for="nav-search-input" class="sr-only">Search Nexora</label>
+                            <input type="text" id="nav-search-input" name="field-keywords" value="{{ query }}"
+                                placeholder="Search Nexora" class="nav-input" dir="auto">
+
+                            <div class="nav-right">
+                                <button type="submit" class="nav-search-submit"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>       
+    <!-- {% endif %} -->
+
+    <div class="user-nav">
+        <a href="{% url 'cart' %}" aria-label="{{ cart_count }} items in cart"
+            class="nav-a nav-a-2 nav-progressive-attribute" id="nav-cart">
+            <div id="nav-cart-count-container">
+                <span id="nav-cart-count" aria-hidden="true"
+                    class="nav-cart-count nav-cart-0 nav-progressive-attribute nav-progressive-content">{{ cart_count }} 0</span>
+                <span cldocument.querySelectorass="nav-cart-icon nav-sprite"><i class="fas fa-shopping-cart"></i></span>
+            </div>
+            <div id="nav-cart-text-container" class="nav-progressive-attribute">
+                <span aria-hidden="true" class="nav-line-1">Your</span>
+                <span aria-hidden="true" class="nav-line-2">Cart <span class="nav-icon nav-arrow"></span></span>
+            </div>
+        </a>
+        <div class="language-dropdown">
+            <button class="language-button" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-globe"></i>
+                <span id="language-code">ENG</span> <!-- Language code placeholder -->
+            </button>
+            <div class="language-content dropdown-content">
+                <a href="#" data-lang="ENG">English</a>
+                <a href="#" data-lang="ESP">Español</a>
+                <a href="#" data-lang="FRA">Français</a>
+                <a href="#" data-lang="DEU">Deutsch</a>
+                <a href="#" data-lang="CHI">中文</a>
+                <a href="#" data-lang="JPN">日本語</a>
+                <a href="#" data-lang="KOR">한국어</a>
+                <a href="#" data-lang="POR">Português</a>
+                <a href="#" data-lang="RUS">Русский</a>
+            </div>
+        </div>
+        <div class="nav-right">
+            <div class="settings-dropdown">
+                <div id="settings-button" class="settings-button">
+                    <a href="{% url 'setting' %}" role="menuitem"><i class="fas fa-cog"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<nav class="navbar navbar-expand-lg navbar-dark header-bottom">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#bottomNavbar"
+            aria-controls="bottomNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="bottomNavbar">
+            <ul class="navbar-nav ms-auto me-auto mb-2 mb-lg-0 nav-middle">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'products' %}">Application</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'deals' %}">Today's Deals</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Customer Service</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Testimonial</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Buy Order</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Service</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Digital
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Crypto</a></li>
+                        <li><a class="dropdown-item" href="#">Gift Card</a></li>
+                        <li><a class="dropdown-item" href="#">NFT</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="user-bar">
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'signup' %}"><span>Signup</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

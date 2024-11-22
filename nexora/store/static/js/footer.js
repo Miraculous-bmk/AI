@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
         }
-    });
+    });                                
 
     // Listener for other checkboxes
     channelCheckboxes.forEach(checkbox => {

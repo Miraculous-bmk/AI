@@ -1,0 +1,26 @@
+{% extends "base/base.html" %}
+{% block content %}
+<section class="products-container">
+    {% if products %}
+        {% for product_type, products in grouped_products.items %}
+            <div class="product-type-section">
+                <h2>{{ product_type }}</h2>
+                <div class="product-items">
+                    {% for product in products_in_type %}
+                        <div class="product-item">
+                            <h3>{{ product.name }}</h3>
+                            <p>{{ product.description }}</p>
+                            <p>Price: ${{ product.price }}</p>
+                            <div>
+                            
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No products available.</p>
+    {% endif %}
+</section>
+{% endblock content %}

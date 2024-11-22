@@ -1,0 +1,83 @@
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static './css/newsline.css' %}">
+</head>
+
+<body>
+    <section class="news_line">
+        <!-- Brand News Section -->
+        <div class="news-slideshow brand-news-slideshow">
+            <h3>Brand News</h3>
+            <div class="all_base">
+                {% if brand_news %}
+                    <div class="news-container">
+                        {% for news in brand_news %}
+                            <div class="slide">
+                                <div class="news_title">
+                                    <h4>{{ news.title }}</h4>
+                                </div>
+                                <div class="newsline">
+                                    <div class="news-image-container">
+                                        {% if news.image %}
+                                            <img src="{{ news.image }}" alt="{{ news.title }}" class="news-image">
+                                        {% else %}
+                                            <img src="{% static 'default-news-image.jpg' %}" alt="No Image Available" class="news-image">
+                                        {% endif %}
+                                    </div>
+                                    <div class="news-content">
+                                        <p>{{ news.description }}</p>
+                                    </div>
+                                </div>
+                                <a class="news-url" href="{{ news.url }}" target="_blank">Read more</a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p>No brand news available at this time.</p>
+                {% endif %}
+            </div>
+        </div>
+
+            <!-- Crypto News Section -->
+        <div class="news-slideshow crypto-news-slideshow">
+            <h3>Crypto News</h3>
+            <div class="all_base">
+                {% if crypto_news %}
+                    <div class="news-container">
+                        {% for news in crypto_news %}
+                            <div class="slide">
+                                <div class="news_title">
+                                    <h4>{{ news.title }}</h4>
+                                </div>
+                                <div class="newsline">
+                                    <div class="news-image-container">
+                                        {% if news.metadata and news.metadata.image %}
+                                        <img src="{{ news.metadata.image }}" alt="{{ news.title }}" class="news-image">
+                                        {% else %}
+                                        <img src="{% static 'default-news-image.jpg' %}" alt="No Image Available" class="news-image">
+                                        {% endif %}
+                                    </div>
+                                    <div class="news-content">
+                                        <h4>{{ news.title }}</h4>
+                                        <p>{{ news.description }}</p>
+                                        {% if news.panic_score %}
+                                        <p>Panic Score: {{ news.panic_score }}</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <a class="news-url" href="{{ news.url }}" target="_blank">Read more</a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="error-news">
+                        <p>No crypto news available at this time.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Include JavaScript for the slideshow -->
+    <script src="{% static 'js/slide.js' %}"></script>
+</body>

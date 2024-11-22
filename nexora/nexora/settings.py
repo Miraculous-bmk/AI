@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'store.apps.StoreConfig',
+    'django_cron',
+    'news.apps.NewsConfig',
 ]
 
 MIDDLEWARE = [
@@ -63,6 +65,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'store.context.newsletter_form',
+                'news.context.news_data',
+                # 'store.context.trending_data',
             ],
         },
     },
@@ -70,6 +75,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'nexora.wsgi.application'
 
+
+CRON_CLASSES = [
+    "news.cron.UpdateNewsJob",
+]
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    }
+}
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
@@ -91,6 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS':{'min_length': 8,}
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
@@ -98,6 +117,9 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
+    {
+        'NAME': 'store.validators.CustomPasswordValidator',
+    }
 ]
 
 
@@ -123,12 +145,10 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# settings.py
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'mikosnetworks@gmail.com'
-EMAIL_HOST_PASSWORD = '5565585Mira$'
-DEFAULT_FROM_EMAIL = 'mikosnetworks@gmail.com'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'mikosnetworks@gmail.com'
+# EMAIL_HOST_PASSWORD = '5565585Mira$'
+# DEFAULT_FROM_EMAIL = 'mikosnetworks@gmail.com'
